@@ -1167,6 +1167,7 @@ a:focus-visible,button:focus-visible{outline:calc(1.5*var(--t)) solid #e8d1cb;ou
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js';
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js';
+import { getFirestore, collection, addDoc, doc, getDocFromServer } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js';
 
 /* ---------------------------------------------------------------
    FIREBASE & GOOGLE WORKSPACE OAUTH CONFIGURATION
@@ -1176,6 +1177,7 @@ const firebaseConfig = {
   appId: "1:129544286433:web:0d0d630f1821f1398b87a0",
   apiKey: "AIzaSyA73ZunjtMk2snaH111_nqFrHpF8Sb1WCY",
   authDomain: "gen-lang-client-0141427722.firebaseapp.com",
+  firestoreDatabaseId: "ai-studio-redflagworld-8e50aa54-7e36-40f3-9599-548ef791e80d",
   storageBucket: "gen-lang-client-0141427722.firebasestorage.app",
   messagingSenderId: "129544286433",
   measurementId: "",
@@ -1185,6 +1187,16 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app, firebaseConfig.firestoreDatabaseId || '(default)');
+
+// Validate connection
+(async function testDbConnection() {
+  try {
+    await getDocFromServer(doc(db, 'inquiries', '_ping_'));
+  } catch (e) {
+    // Expected ping error or offline check
+  }
+})();
 
 const provider = new GoogleAuthProvider();
 provider.addScope('https://www.googleapis.com/auth/drive');
@@ -1928,6 +1940,19 @@ if (joinForm) {
     const phone = document.getElementById('joinPhone')?.value || '';
     const interest = document.getElementById('joinInterest')?.value || '';
 
+    // Persist to Cloud Firestore database
+    try {
+      await addDoc(collection(db, 'inquiries'), {
+        name,
+        email,
+        phone: phone || '-',
+        interest,
+        createdAt: new Date().toISOString()
+      });
+    } catch (dbErr) {
+      console.warn('Firestore store inquiry warning:', dbErr);
+    }
+
     // Append to Google Sheet if connected
     const synced = await appendEntryToSheet({
       type: 'Join Inquiry',
@@ -1954,6 +1979,16 @@ if (newsletterForm) {
   newsletterForm.addEventListener('submit', async e => {
     e.preventDefault();
     const email = document.getElementById('newsEmail')?.value || '';
+
+    // Persist to Cloud Firestore database
+    try {
+      await addDoc(collection(db, 'newsletter_subscribers'), {
+        email,
+        createdAt: new Date().toISOString()
+      });
+    } catch (dbErr) {
+      console.warn('Firestore store subscriber warning:', dbErr);
+    }
 
     // Append to Google Sheet if connected
     const synced = await appendEntryToSheet({

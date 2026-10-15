@@ -1,0 +1,58 @@
+{
+  "entities": {
+    "Inquiry": {
+      "title": "Inquiry",
+      "description": "A join or partnership inquiry submitted via the website.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Full name of the person submitting the inquiry"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the inquirer"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Phone number of the inquirer"
+        },
+        "interest": {
+          "type": "string",
+          "description": "Selected area of interest"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp of inquiry submission"
+        }
+      },
+      "required": ["name", "email", "interest", "createdAt"]
+    },
+    "Subscriber": {
+      "title": "Subscriber",
+      "description": "A newsletter email subscriber.",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Email address of subscriber"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp of subscription"
+        }
+      },
+      "required": ["email", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/inquiries/{inquiryId}": {
+      "schema": "Inquiry",
+      "description": "Collection of incoming partner and investment inquiries"
+    },
+    "/newsletter_subscribers/{subscriberId}": {
+      "schema": "Subscriber",
+      "description": "Collection of newsletter subscribers"
+    }
+  }
+}

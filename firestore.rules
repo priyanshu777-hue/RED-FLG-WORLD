@@ -1,0 +1,46 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default Deny Catch-All
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function isValidInquiry(inquiryId) {
+      return isValidId(inquiryId)
+        && incoming().keys().hasAll(['name', 'email', 'interest', 'createdAt'])
+        && incoming().keys().hasOnly(['name', 'email', 'phone', 'interest', 'createdAt'])
+        && incoming().name is string && incoming().name.size() > 0 && incoming().name.size() <= 150
+        && incoming().email is string && incoming().email.size() > 3 && incoming().email.size() <= 200
+        && (!('phone' in incoming()) || (incoming().phone is string && incoming().phone.size() <= 50))
+        && incoming().interest is string && incoming().interest.size() > 0 && incoming().interest.size() <= 100
+        && incoming().createdAt is string && incoming().createdAt.size() <= 50;
+    }
+
+    function isValidSubscriber(subscriberId) {
+      return isValidId(subscriberId)
+        && incoming().keys().hasAll(['email', 'createdAt'])
+        && incoming().keys().hasOnly(['email', 'createdAt'])
+        && incoming().email is string && incoming().email.size() > 3 && incoming().email.size() <= 200
+        && incoming().createdAt is string && incoming().createdAt.size() <= 50;
+    }
+
+    match /inquiries/{inquiryId} {
+      allow create: if isValidInquiry(inquiryId);
+      allow read, update, delete: if false;
+    }
+
+    match /newsletter_subscribers/{subscriberId} {
+      allow create: if isValidSubscriber(subscriberId);
+      allow read, update, delete: if false;
+    }
+  }
+}

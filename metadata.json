@@ -1,0 +1,6 @@
+{
+  "name": "Red Flag World — Where Stays, Stories and Ventures Meet",
+  "description": "Red Flag World is a global group building hospitality, media and investment brands for a new generation — bold, design-led and built across borders.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

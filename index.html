@@ -1,0 +1,2006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Red Flag World — Where Stays, Stories and Ventures Meet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.className="anim";setTimeout(function(){document.documentElement.classList.remove("anim")},3200);}</script>
+<meta name="description" content="Red Flag World is a global group building hospitality, media and investment brands for a new generation — bold, design-led and built across borders.">
+<style>
+/* ---------- embedded faces ---------- */
+@font-face{font-family:'Inter S';src:url(assets/fonts/inter-s-400.woff2) format('woff2');font-weight:400;font-style:normal;font-display:block}
+@font-face{font-family:'Inter S';src:url(assets/fonts/inter-s-700.woff2) format('woff2');font-weight:700;font-style:normal;font-display:block}
+@font-face{font-family:'Chakra S';src:url(assets/fonts/chakra-s-700.woff2) format('woff2');font-weight:700;font-style:normal;font-display:block}
+
+/* ---------- reference unit ----------
+   Every measurement below is a real pixel value read off the 1280x800 reference.
+   --u is the reference pixel: 1px at 1280x800, and it scales with the viewport,
+   so proportions are preserved while the chrome stays anchored to the real edges. */
+:root{
+  --u: clamp(0.68px, min(100vw / 1280, 100vh / 800), 1.72px);
+  --t: var(--u);   /* desktop: content and structure share one scale */
+  --u: clamp(0.68px, min(100vw / 1280, 100dvh / 800), 1.72px);
+  --line: rgba(255,255,255,.13);
+  --cream:#e8d1cb;
+  --ink:#15131b;
+  --hair: max(1px, calc(1 * var(--u)));
+  --nudge: calc(1 * var(--t));   /* Chrome centres these caps ~1px high */
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;background:#04070d;overflow:hidden;
+  font-family:'Inter S','Inter',-apple-system,'Helvetica Neue',Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  text-rendering:geometricPrecision;
+}
+.stage{position:fixed;inset:0;overflow:hidden}
+
+/* ---------- hero image: graded exactly as the reference, cover, centred ---------- */
+.bg{position:absolute;inset:0;background-image:url(assets/img/background.webp);
+    background-size:cover;background-position:50% 50%;background-repeat:no-repeat}
+/* the video box is sized to cover the stage at 16:9 (no object-fit crop, so it can
+   move without exposing an edge). The arch sits ~4% left of centre in the clip:
+   scale up 10% and shift the box right by 4.5% of its own width. */
+.bg video{position:absolute;left:50%;top:50%;display:block;
+          width:max(100vw, 177.78vh);height:max(100vh, 56.25vw);
+          transform:translate(-45.5%,-50%) scale(1.1)}
+/* one clip per chapter, stacked; the chosen one fades up over the last */
+.bg video{opacity:0;transition:opacity .9s ease}
+.bg video.on{opacity:1}
+/* chapter change: subtle fade-in entrance for headline, body text and extras */
+.hero .headline{
+  opacity:1;
+  transition:opacity .62s cubic-bezier(.16,1,.3,1);
+}
+.hero .hrise{
+  opacity:1;
+  transform:translateY(0);
+  transition:opacity .56s cubic-bezier(.16,1,.3,1), transform .62s var(--e-mask);
+}
+.hero .hrow:first-child .hrise{
+  transition-delay:0s;
+}
+.hero .hrow+.hrow .hrise{
+  transition-delay:.07s;
+}
+.hero .blurb{
+  opacity:1;
+  transform:translateY(0);
+  transition:opacity .65s cubic-bezier(.16,1,.3,1) .14s, transform .65s var(--e-soft) .14s;
+}
+.hero-extra{
+  transition:opacity .6s ease .18s, transform .6s var(--e-soft) .18s;
+}
+
+/* exit phase while swapping */
+.swapping .headline{
+  opacity:0;
+  transition:opacity .28s ease-in;
+}
+.swapping .hrise{
+  opacity:0;
+  transform:translateY(112%);
+  transition:opacity .26s ease-in, transform .34s ease-in;
+  transition-delay:0s!important;
+}
+.swapping .blurb{
+  opacity:0;
+  transform:translateY(calc(8*var(--t)));
+  transition:opacity .26s ease-in, transform .3s ease-in;
+  transition-delay:0s!important;
+}
+.swapping .hero-extra{
+  opacity:0;
+  transform:translateY(calc(8*var(--t)));
+  transition:opacity .24s ease-in, transform .28s ease-in;
+  transition-delay:0s!important;
+}
+
+/* ---------- frame: 30u inset, 1px hairline, 26u chamfer on all four corners ---------- */
+.frame{position:absolute;left:calc(30*var(--u));top:calc(30*var(--u));
+       right:calc(30*var(--u));bottom:calc(31*var(--u))}
+.ln{position:absolute;background:var(--line)}
+.ln-t{left:calc(26*var(--u));right:calc(26*var(--u));top:0;height:var(--hair)}
+.ln-b{left:calc(26*var(--u));right:calc(26*var(--u));bottom:0;height:var(--hair)}
+.ln-l{top:calc(26*var(--u));bottom:calc(26*var(--u));left:0;width:var(--hair)}
+.ln-r{top:calc(26*var(--u));bottom:calc(26*var(--u));right:0;width:var(--hair)}
+.cn{position:absolute;width:calc(26*var(--u));height:calc(26*var(--u))}
+.cn-tl{left:0;top:0;background:linear-gradient(to bottom right,transparent calc(50% - .65px),var(--line) calc(50% - .65px),var(--line) calc(50% + .65px),transparent calc(50% + .65px))}
+.cn-br{right:0;bottom:0;background:linear-gradient(to bottom right,transparent calc(50% - .65px),var(--line) calc(50% - .65px),var(--line) calc(50% + .65px),transparent calc(50% + .65px))}
+.cn-tr{right:0;top:0;background:linear-gradient(to bottom left,transparent calc(50% - .65px),var(--line) calc(50% - .65px),var(--line) calc(50% + .65px),transparent calc(50% + .65px))}
+.cn-bl{left:0;bottom:0;background:linear-gradient(to bottom left,transparent calc(50% - .65px),var(--line) calc(50% - .65px),var(--line) calc(50% + .65px),transparent calc(50% + .65px))}
+
+/* ---------- shared label face ---------- */
+.lbl{font-family:'Chakra S','Chakra Petch','Inter S',sans-serif;font-weight:700;
+     font-size:calc(10*var(--t));line-height:1;white-space:nowrap}
+.t{position:relative;top:var(--nudge);display:inline-block;text-align:left;white-space:pre}
+.bg{will-change:transform;transform-origin:50% 50%;backface-visibility:hidden}
+
+/* ---------- masthead ---------- */
+.logo{position:absolute;left:calc(24*var(--t));top:calc(22*var(--t));
+      height:calc(20*var(--t));display:flex;align-items:center;text-decoration:none}
+.logo-text{font-family:'Chakra S','Chakra Petch','Inter S',sans-serif;font-weight:700;
+           font-size:calc(12.5*var(--t));line-height:1;letter-spacing:calc(2.2*var(--t));
+           color:#fff;white-space:nowrap;text-transform:uppercase;display:inline-block}
+
+.masthead{position:absolute;right:calc(11*var(--t));top:calc(12*var(--t));
+          height:calc(41*var(--t));display:flex;align-items:center}
+.navset{display:contents}
+.links{display:flex;align-items:center;gap:calc(15*var(--t));margin-right:calc(18*var(--t))}
+.links a{color:#e3e8f2;text-decoration:none;letter-spacing:calc(.15*var(--t));
+         padding-left:calc(.1*var(--t));opacity:.94;transition:opacity .25s ease,color .25s ease}
+.links a:hover{opacity:1;color:#fff}
+
+.pill{height:calc(41*var(--t));display:flex;align-items:center;text-decoration:none;
+      position:relative;cursor:pointer;border:0;padding:0}
+.pill .ico{flex:none;display:block}
+
+.join-btn{width:calc(108*var(--t));padding-left:calc(19*var(--t));background:var(--cream);
+          clip-path:polygon(0 0, calc(100% - 15*var(--t)) 0, 100% calc(15*var(--t)), 100% 100%, 0 100%);
+          transition:background .3s ease, transform .2s ease;cursor:pointer;border:0}
+.join-btn:hover{background:#f2e3de}
+.join-btn .ico{width:calc(10*var(--t));height:calc(10*var(--t));fill:var(--ink)}
+.join-btn span{color:var(--ink);margin-left:calc(7*var(--t));letter-spacing:calc(.08*var(--t))}
+
+/* ---------- section index ---------- */
+.index{position:absolute;left:calc(10.5*var(--t));top:50%;transform:translateY(calc(-50% + 1.5*var(--t)));
+       list-style:none;margin:0;padding:0}
+.index li{height:calc(26*var(--t));display:flex;align-items:center;position:relative}
+.index a{font-family:'Chakra S','Chakra Petch','Inter S',sans-serif;font-weight:700;font-size:calc(9.5*var(--t));
+         line-height:1;letter-spacing:calc(1.3*var(--t));text-decoration:none;white-space:nowrap;
+         color:rgba(232,238,250,.35);transition:color .3s ease}
+.index a:hover{color:#e6eaf5}
+.index .on a{color:#e6eaf5}
+.index .on::before{content:"";position:absolute;left:calc(-13.5*var(--t));top:50%;
+                   width:calc(6*var(--t));height:calc(7*var(--t));
+                   transform:translateY(-50%);background:#fff}
+
+/* ---------- nav hover about preview ---------- */
+.nav-preview{
+  position:absolute;left:calc(100% + 22*var(--t));top:50%;
+  transform:translateY(-50%) translateX(calc(-8*var(--t)));
+  width:calc(240*var(--t));
+  background:rgba(8,12,18,.94);
+  -webkit-backdrop-filter:blur(calc(16*var(--t)));backdrop-filter:blur(calc(16*var(--t)));
+  border:var(--hair) solid rgba(255,255,255,.18);
+  padding:calc(11*var(--t)) calc(13*var(--t));
+  clip-path:polygon(0 0, calc(100% - 10*var(--t)) 0, 100% calc(10*var(--t)), 100% 100%, 0 100%);
+  box-shadow:0 calc(12*var(--t)) calc(28*var(--t)) rgba(0,0,0,.65);
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .25s ease, transform .25s cubic-bezier(.16,1,.3,1), visibility .25s;
+  z-index:40;text-align:left;white-space:normal;
+}
+.nav-preview::before{
+  content:"";position:absolute;right:100%;top:50%;
+  width:calc(12*var(--t));height:var(--hair);
+  background:rgba(232,209,203,.45);transform:translateY(-50%);
+}
+.index li:hover .nav-preview,
+.index li:focus-within .nav-preview{
+  opacity:1;visibility:visible;
+  transform:translateY(-50%) translateX(0);
+}
+.prev-tag{
+  font-family:'Chakra S','Chakra Petch',sans-serif;font-size:calc(7.2*var(--t));
+  font-weight:700;letter-spacing:calc(1.2*var(--t));color:var(--cream);
+  margin-bottom:calc(3*var(--t));text-transform:uppercase;display:block;
+}
+.prev-title{
+  font-family:'Chakra S','Chakra Petch',sans-serif;font-size:calc(9.5*var(--t));
+  font-weight:700;line-height:1.25;color:#fff;
+  letter-spacing:calc(.4*var(--t));margin-bottom:calc(4*var(--t));text-transform:uppercase;display:block;
+}
+.prev-desc{
+  font-family:'Inter S','Inter',sans-serif;font-size:calc(8.4*var(--t));
+  font-weight:400;line-height:1.42;color:rgba(224,232,245,.76);display:block;
+}
+.prev-meta{
+  font-family:'Chakra S','Chakra Petch',sans-serif;font-size:calc(7.2*var(--t));
+  font-weight:700;letter-spacing:calc(1*var(--t));color:var(--cream);
+  margin-top:calc(5*var(--t));opacity:.85;display:block;text-transform:uppercase;
+}
+@media (max-width: 830px), (hover: none){
+  .nav-preview{display:none!important}
+}
+
+/* ---------- hero ---------- */
+.hero{position:absolute;left:0;right:0;bottom:max(7.8%, calc(58*var(--t)));
+      display:flex;flex-direction:column;align-items:center;text-align:center;
+      pointer-events:none}
+.hero > *{pointer-events:auto}
+.headline{margin:0;font-weight:700;font-size:calc(30.5*var(--t));line-height:calc(32*var(--t));
+          letter-spacing:calc(1.5*var(--t));padding-left:calc(1.5*var(--t));
+          color:#fff;text-transform:uppercase}
+.blurb{margin:calc(14*var(--t)) 0 0;font-weight:400;font-size:calc(11*var(--t));
+       line-height:calc(19.2*var(--t));color:rgba(224,232,245,.76);
+       max-width:calc(480*var(--t));padding:0 calc(10*var(--t))}
+.lead-line{display:block;color:#fff;font-weight:700;margin-bottom:calc(5*var(--t));letter-spacing:calc(.25*var(--t))}
+.lead-line:empty{display:none}
+
+.cta{margin-top:calc(18*var(--t));position:relative;width:calc(236*var(--t));height:calc(41*var(--t));
+     display:flex;align-items:center;justify-content:center;text-decoration:none;background:none;border:0;cursor:pointer}
+.cta-glass{position:absolute;inset:0;background:rgba(255,255,255,.04);
+  -webkit-backdrop-filter:blur(calc(12*var(--t)));backdrop-filter:blur(calc(12*var(--t)));
+  clip-path:polygon(calc(3*var(--t)) 0, calc(100% - 10*var(--t)) 0, 100% calc(10*var(--t)),
+                    100% calc(100% - 3*var(--t)), calc(100% - 3*var(--t)) 100%,
+                    calc(10*var(--t)) 100%, 0 calc(100% - 10*var(--t)), 0 calc(3*var(--t)));
+  transition:background .3s ease}
+.cta:hover .cta-glass{background:rgba(255,255,255,.08)}
+.cta-edge{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.cta-edge path{fill:none;stroke:rgba(255,255,255,.1);stroke-width:1;transition:stroke .3s ease}
+.cta:hover .cta-edge path{stroke:rgba(255,255,255,.24)}
+.cta-in{position:relative;display:flex;align-items:center}
+.cta .ico{width:calc(7*var(--t));height:calc(11*var(--t));fill:#f2f6ff;flex:none}
+.cta .t{margin-left:calc(7*var(--t));color:#e9eef7;letter-spacing:calc(.6*var(--t))}
+
+/* ---------- hero dynamic extras: holdings cards & origin map ---------- */
+.hero-extra{margin-top:calc(14*var(--t));width:100%;max-width:calc(500*var(--t));display:none;
+            transition:opacity .4s ease, transform .4s ease}
+.hero-extra.show{display:block;animation:settle .5s var(--e-soft) both}
+
+.holdings-cards{display:grid;grid-template-columns:repeat(3, 1fr);gap:calc(8*var(--t));text-align:left}
+.h-card{
+  background:rgba(12,16,24,.6);
+  -webkit-backdrop-filter:blur(calc(10*var(--t)));backdrop-filter:blur(calc(10*var(--t)));
+  border:var(--hair) solid rgba(255,255,255,.14);
+  padding:calc(10*var(--t)) calc(11*var(--t));
+  transition:border-color .3s ease, background .3s ease;
+}
+.h-card:hover{background:rgba(18,24,34,.75);border-color:rgba(232,209,203,.4)}
+.h-card-tag{
+  font-family:'Chakra S','Chakra Petch',sans-serif;font-size:calc(7.5*var(--t));font-weight:700;
+  letter-spacing:calc(1*var(--t));color:var(--cream);margin-bottom:calc(4*var(--t));text-transform:uppercase;
+}
+.h-card-title{
+  font-family:'Chakra S','Chakra Petch',sans-serif;font-size:calc(9.5*var(--t));font-weight:700;
+  line-height:1.25;color:#fff;letter-spacing:calc(.3*var(--t));margin-bottom:calc(4*var(--t));
+}
+.h-card-desc{font-size:calc(8.2*var(--t));line-height:1.35;color:rgba(224,232,245,.68)}
+.h-card-badge{
+  display:inline-block;font-family:'Chakra S','Chakra Petch',sans-serif;font-size:calc(7.5*var(--t));
+  font-weight:700;letter-spacing:calc(1*var(--t));color:var(--cream);
+  border:var(--hair) solid rgba(232,209,203,.4);padding:calc(2*var(--t)) calc(6*var(--t));
+  margin-top:calc(5*var(--t));
+}
+
+.origin-journey{display:flex;flex-direction:column;align-items:center}
+.journey-map{width:calc(320*var(--t));max-width:88vw}
+.journey-map svg{width:100%;height:auto;display:block;overflow:visible}
+.journey-dash{animation:journeyFlow 2.4s linear infinite}
+@keyframes journeyFlow{from{stroke-dashoffset:28}to{stroke-dashoffset:0}}
+.journey-pulse{animation:pulseBeacon 2s ease-out infinite;transform-origin:center}
+@keyframes pulseBeacon{0%{transform:scale(0.8);opacity:1}100%{transform:scale(2.2);opacity:0}}
+.journey-caption{
+  margin-top:calc(6*var(--t));font-family:'Chakra S','Chakra Petch',sans-serif;font-size:calc(8*var(--t));
+  font-weight:700;letter-spacing:calc(1.4*var(--t));color:var(--cream);opacity:.9;text-transform:uppercase;
+}
+
+/* ---------- dock ---------- */
+.dock{position:absolute;left:0;right:0;bottom:0;height:calc(47*var(--t));--nudge:calc(1.6*var(--t))}
+.dock .rule{position:absolute;left:0;right:0;top:0;height:var(--hair);background:var(--line)}
+.dock a,.dock button{display:flex;align-items:center;text-decoration:none;background:none;
+      border:0;padding:0;cursor:pointer;color:rgba(255,255,255,.82);transition:color .3s ease}
+.dock a:hover,.dock button:hover{color:#fff}
+.dock .copyright{
+  position:absolute;left:50%;transform:translateX(-50%);top:0;bottom:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Inter S','Inter',sans-serif;font-size:calc(9.2*var(--t));font-weight:400;
+  letter-spacing:calc(1.8*var(--t));color:rgba(224,232,245,.5);white-space:nowrap;
+  user-select:none;text-transform:uppercase;pointer-events:none;
+}
+.talk{position:absolute;right:calc(24*var(--t));top:0;bottom:0}
+.talk span{letter-spacing:calc(.12*var(--t))}
+.talk .ico{width:calc(16*var(--t));height:calc(15*var(--t));margin-left:calc(11*var(--t));
+           flex:none;fill:none;stroke:currentColor;stroke-width:1.6}
+
+/* ---------- visual progress bar at bottom of screen ---------- */
+.dock-progress{
+  position:absolute;left:calc(26*var(--u));right:calc(26*var(--u));top:0;z-index:5;pointer-events:none;
+}
+.prog-segments{
+  display:grid;grid-template-columns:repeat(6, 1fr);gap:calc(6*var(--t));
+  position:relative;top:calc(-1*var(--hair));pointer-events:auto;
+}
+.prog-seg{
+  appearance:none;-webkit-appearance:none;background:none;border:0;margin:0;padding:0;
+  position:relative;cursor:pointer;display:flex;flex-direction:column-reverse;
+  text-align:left;outline:none;color:rgba(232,238,250,.32);transition:color .25s ease;
+}
+.prog-seg::before{
+  content:"";position:absolute;inset:calc(-16*var(--t)) 0 calc(-8*var(--t)) 0;
+}
+.prog-seg:hover{color:rgba(232,238,250,.85)}
+.prog-seg.on{color:#fff}
+.prog-seg.passed{color:rgba(232,238,250,.55)}
+.seg-track{
+  height:calc(2*var(--hair));background:rgba(255,255,255,.14);position:relative;
+  display:block;width:100%;transition:background .3s ease, height .25s ease, box-shadow .3s ease;
+}
+.prog-seg:hover .seg-track{background:rgba(255,255,255,.35)}
+.prog-seg.passed .seg-track{background:rgba(255,255,255,.45)}
+.prog-seg.on .seg-track{
+  height:calc(2.5*var(--hair));background:var(--cream);
+  box-shadow:0 0 calc(8*var(--t)) rgba(232,209,203,.75), 0 0 calc(2*var(--t)) #fff;
+}
+.seg-info{
+  position:absolute;bottom:calc(6*var(--t));left:0;display:flex;align-items:center;
+  gap:calc(3.5*var(--t));font-family:'Chakra S','Chakra Petch','Inter S',sans-serif;font-weight:700;
+  font-size:calc(8.8*var(--t));line-height:1;letter-spacing:calc(.8*var(--t));
+  white-space:nowrap;user-select:none;
+}
+.seg-idx{font-feature-settings:"tnum";font-variant-numeric:tabular-nums;opacity:.9}
+.seg-sep{opacity:.35;transition:opacity .25s ease}
+.seg-name{text-transform:uppercase;letter-spacing:calc(1*var(--t));transition:opacity .25s ease}
+.prog-seg:focus-visible{outline:calc(1.5*var(--t)) solid var(--cream);outline-offset:calc(2*var(--t))}
+
+@media (max-width: 1000px){
+  .prog-seg:not(.on):not(:hover) .seg-name,
+  .prog-seg:not(.on):not(:hover) .seg-sep{
+    opacity:0;
+  }
+}
+@media (max-width: 548px){
+  .dock-progress{left:calc(14*var(--u));right:calc(14*var(--u))}
+  .prog-segments{gap:calc(3.5*var(--t))}
+  .seg-info{font-size:calc(8*var(--t));bottom:calc(5*var(--t))}
+  .prog-seg:not(.on) .seg-name,
+  .prog-seg:not(.on) .seg-sep{
+    opacity:0;
+  }
+}
+
+/* ---------- modal overlays & forms ---------- */
+.modal-overlay{
+  position:fixed;inset:0;z-index:90;
+  background:rgba(4,7,13,.78);
+  -webkit-backdrop-filter:blur(calc(16*var(--t)));backdrop-filter:blur(calc(16*var(--t)));
+  display:flex;align-items:center;justify-content:center;
+  padding:calc(20*var(--t));
+  opacity:0;visibility:hidden;
+  transition:opacity .35s ease, visibility .35s ease;
+}
+.modal-overlay.open{opacity:1;visibility:visible}
+.modal-box{
+  width:min(calc(440*var(--t)), 92vw);
+  max-height:90vh;overflow-y:auto;
+  background:rgba(12,16,24,.96);
+  border:var(--hair) solid rgba(255,255,255,.18);
+  padding:calc(26*var(--t)) calc(28*var(--t));
+  position:relative;
+  clip-path:polygon(calc(14*var(--t)) 0, 100% 0, 100% calc(100% - 14*var(--t)), calc(100% - 14*var(--t)) 100%, 0 100%, 0 calc(14*var(--t)));
+  box-shadow:0 calc(20*var(--t)) calc(40*var(--t)) rgba(0,0,0,.6);
+  transform:translateY(calc(14*var(--t))) scale(.98);
+  transition:transform .35s cubic-bezier(.22,.61,.36,1);
+}
+.modal-overlay.open .modal-box{transform:translateY(0) scale(1)}
+.modal-close{
+  position:absolute;top:calc(14*var(--t));right:calc(16*var(--t));
+  background:none;border:0;padding:calc(6*var(--t));cursor:pointer;
+  color:rgba(255,255,255,.5);transition:color .2s ease;
+  display:flex;align-items:center;justify-content:center;
+}
+.modal-close:hover{color:#fff}
+.modal-close svg{width:calc(13*var(--t));height:calc(13*var(--t));}
+.modal-head{margin-bottom:calc(18*var(--t))}
+.modal-tag{
+  font-family:'Chakra S','Chakra Petch',sans-serif;font-size:calc(8.5*var(--t));
+  font-weight:700;letter-spacing:calc(1.6*var(--t));color:var(--cream);margin-bottom:calc(6*var(--t));
+}
+.modal-title{
+  margin:0;font-family:'Chakra S','Chakra Petch',sans-serif;font-weight:700;
+  font-size:calc(20*var(--t));line-height:1.2;color:#fff;
+  letter-spacing:calc(1*var(--t));text-transform:uppercase;
+}
+.modal-sub{
+  margin:calc(6*var(--t)) 0 0;font-size:calc(10.5*var(--t));
+  line-height:1.45;color:rgba(224,232,245,.7);
+}
+.modal-form{display:flex;flex-direction:column;gap:calc(12*var(--t))}
+.form-field{display:flex;flex-direction:column;gap:calc(4*var(--t));text-align:left}
+.form-label{
+  font-family:'Chakra S','Chakra Petch',sans-serif;font-weight:700;font-size:calc(8.5*var(--t));
+  letter-spacing:calc(1*var(--t));color:rgba(255,255,255,.75);text-transform:uppercase;
+}
+.form-input,.form-select{
+  background:rgba(255,255,255,.05);
+  border:var(--hair) solid rgba(255,255,255,.16);
+  padding:calc(10*var(--t)) calc(12*var(--t));
+  color:#fff;font-family:'Inter S','Inter',sans-serif;font-size:calc(11*var(--t));
+  outline:none;transition:border-color .25s ease, background .25s ease;
+  border-radius:0;
+}
+.form-input:focus,.form-select:focus{
+  border-color:var(--cream);background:rgba(255,255,255,.08);
+}
+.form-select option{background:#0c1018;color:#fff}
+.form-submit{
+  margin-top:calc(8*var(--t));height:calc(41*var(--t));
+  background:var(--cream);color:var(--ink);
+  border:0;cursor:pointer;
+  font-family:'Chakra S','Chakra Petch',sans-serif;font-weight:700;
+  font-size:calc(10*var(--t));letter-spacing:calc(1.2*var(--t));text-transform:uppercase;
+  clip-path:polygon(calc(3*var(--t)) 0, calc(100% - 10*var(--t)) 0, 100% calc(10*var(--t)), 100% 100%, 0 100%, 0 calc(3*var(--t)));
+  transition:background .25s ease, transform .2s ease;
+}
+.form-submit:hover{background:#f0ded9}
+.form-success{padding:calc(20*var(--t)) 0;text-align:center;display:none}
+.form-success.show{display:block;animation:fadeIn .4s ease both}
+.success-ico{
+  width:calc(32*var(--t));height:calc(32*var(--t));margin:0 auto calc(12*var(--t));
+  fill:none;stroke:var(--cream);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+}
+.success-title{
+  font-family:'Chakra S','Chakra Petch',sans-serif;font-weight:700;font-size:calc(14*var(--t));
+  color:#fff;letter-spacing:calc(1.2*var(--t));margin-bottom:calc(6*var(--t));
+}
+.success-msg{
+  font-size:calc(10.5*var(--t));color:rgba(224,232,245,.75);line-height:1.5;max-width:calc(340*var(--t));margin:0 auto;
+}
+
+/* ---------- Google Sheets Hub & Sign-in Styles ---------- */
+.sheets-modal-box{width:min(calc(660*var(--t)), 96vw)}
+.sheets-pill{
+  margin-right:calc(8*var(--t));
+  background:rgba(74,222,128,.08);
+  border:var(--hair) solid rgba(74,222,128,.28);
+}
+.sheets-pill:hover{background:rgba(74,222,128,.14)}
+.sheets-pill .ico{fill:#4ade80}
+.sheets-pill span{color:#e6fcf0}
+
+.sheets-card{
+  background:rgba(255,255,255,.03);
+  border:var(--hair) solid rgba(255,255,255,.12);
+  padding:calc(14*var(--t)) calc(16*var(--t));
+  margin-bottom:calc(14*var(--t));
+  text-align:left;
+}
+.sheets-card-head{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:calc(10*var(--t));flex-wrap:wrap;gap:calc(8*var(--t));
+}
+.sheets-card-title{
+  font-family:'Chakra S','Chakra Petch',sans-serif;font-size:calc(11*var(--t));
+  font-weight:700;color:#fff;letter-spacing:calc(.8*var(--t));text-transform:uppercase;
+  display:flex;align-items:center;gap:calc(8*var(--t));
+}
+.sheets-status-tag{
+  display:inline-flex;align-items:center;gap:calc(5*var(--t));
+  font-family:'Chakra S','Chakra Petch',sans-serif;font-size:calc(7.8*var(--t));
+  font-weight:700;letter-spacing:calc(1*var(--t));padding:calc(3*var(--t)) calc(7*var(--t));
+  text-transform:uppercase;border-radius:0;
+}
+.tag-online{background:rgba(74,222,128,.12);color:#4ade80;border:var(--hair) solid rgba(74,222,128,.35)}
+.tag-offline{background:rgba(255,255,255,.06);color:rgba(224,232,245,.6);border:var(--hair) solid rgba(255,255,255,.14)}
+.pulse-dot{
+  width:calc(5.5*var(--t));height:calc(5.5*var(--t));border-radius:50%;
+  background:#4ade80;box-shadow:0 0 calc(6*var(--t)) #4ade80;
+}
+
+/* User profile bar */
+.sheets-user-row{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:calc(12*var(--t));flex-wrap:wrap;
+}
+.sheets-user-info{display:flex;align-items:center;gap:calc(10*var(--t))}
+.sheets-avatar{
+  width:calc(34*var(--t));height:calc(34*var(--t));border-radius:50%;
+  border:var(--hair) solid rgba(255,255,255,.2);object-fit:cover;
+}
+.sheets-name{font-family:'Chakra S',sans-serif;font-size:calc(11*var(--t));font-weight:700;color:#fff}
+.sheets-email{font-size:calc(9.5*var(--t));color:rgba(224,232,245,.65)}
+
+/* GSI Button standard styles */
+.gsi-material-button {
+  -webkit-appearance:none;background-color:#131314;border:1px solid #8e918f;
+  border-radius:2px;box-sizing:border-box;color:#e3e3e3;cursor:pointer;
+  font-family:'Roboto',sans-serif;font-size:calc(11*var(--t));height:calc(36*var(--t));
+  letter-spacing:.25px;outline:none;padding:0 calc(12*var(--t));
+  display:inline-flex;align-items:center;justify-content:center;
+  transition:background-color .2s, border-color .2s;
+}
+.gsi-material-button:hover{background-color:#202124;border-color:#c4c7c5}
+.gsi-material-button .gsi-material-button-icon{width:calc(18*var(--t));height:calc(18*var(--t));margin-right:calc(10*var(--t));flex:none}
+.gsi-material-button .gsi-material-button-contents{font-weight:500;white-space:nowrap}
+
+/* Active sheet details */
+.active-sheet-info{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:calc(10*var(--t));padding:calc(10*var(--t)) calc(12*var(--t));
+  background:rgba(255,255,255,.04);border:var(--hair) solid rgba(255,255,255,.1);
+  margin-top:calc(8*var(--t));flex-wrap:wrap;
+}
+.active-sheet-title{
+  font-family:'Chakra S','Chakra Petch',sans-serif;font-size:calc(10.5*var(--t));
+  font-weight:700;color:#fff;letter-spacing:calc(.5*var(--t));
+}
+.active-sheet-actions{display:flex;align-items:center;gap:calc(8*var(--t))}
+.sheets-btn-sm{
+  height:calc(28*var(--t));padding:0 calc(10*var(--t));
+  background:rgba(255,255,255,.08);color:#fff;border:var(--hair) solid rgba(255,255,255,.2);
+  font-family:'Chakra S',sans-serif;font-size:calc(8*var(--t));font-weight:700;
+  letter-spacing:calc(.8*var(--t));text-transform:uppercase;cursor:pointer;
+  display:inline-flex;align-items:center;gap:calc(5*var(--t));text-decoration:none;
+  transition:background .2s, border-color .2s;
+}
+.sheets-btn-sm:hover{background:rgba(255,255,255,.15);border-color:var(--cream)}
+.sheets-btn-danger{
+  background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.35);color:#fca5a5;
+}
+.sheets-btn-danger:hover{background:rgba(239,68,68,.2);border-color:#ef4444}
+
+/* Live Table */
+.sheets-table-wrap{
+  max-height:calc(210*var(--t));overflow-y:auto;overflow-x:auto;
+  border:var(--hair) solid rgba(255,255,255,.12);background:rgba(0,0,0,.3);
+  margin-top:calc(10*var(--t));
+}
+.sheets-table{width:100%;border-collapse:collapse;font-size:calc(8.8*var(--t));text-align:left}
+.sheets-table th{
+  position:sticky;top:0;background:#0c1018;color:var(--cream);
+  font-family:'Chakra S',sans-serif;font-size:calc(8*var(--t));font-weight:700;
+  letter-spacing:calc(.8*var(--t));padding:calc(7*var(--t)) calc(9*var(--t));
+  border-bottom:var(--hair) solid rgba(255,255,255,.15);white-space:nowrap;
+}
+.sheets-table td{
+  padding:calc(7*var(--t)) calc(9*var(--t));border-bottom:var(--hair) solid rgba(255,255,255,.06);
+  color:rgba(224,232,245,.8);white-space:nowrap;
+}
+.sheets-table tr:hover td{background:rgba(255,255,255,.04);color:#fff}
+.sheet-badge-type{
+  display:inline-block;padding:calc(2*var(--t)) calc(5*var(--t));
+  background:rgba(232,209,203,.15);color:var(--cream);border-radius:2px;
+  font-family:'Chakra S',sans-serif;font-size:calc(7.2*var(--t));font-weight:700;
+}
+.sheet-sync-pill{
+  display:inline-flex;align-items:center;gap:calc(4*var(--t));
+  font-family:'Chakra S',sans-serif;font-size:calc(7.5*var(--t));font-weight:700;
+  color:#4ade80;background:rgba(74,222,128,.1);padding:calc(2*var(--t)) calc(6*var(--t));
+  margin-top:calc(6*var(--t));border:var(--hair) solid rgba(74,222,128,.25);
+}
+
+/* Confirm Dialog for Destructive Operations */
+.confirm-box{
+  width:min(calc(380*var(--t)), 92vw);
+  border-color:rgba(239,68,68,.4);
+}
+.confirm-box .modal-title{color:#fca5a5}
+.confirm-actions{display:flex;gap:calc(10*var(--t));margin-top:calc(18*var(--t))}
+.confirm-actions button{flex:1;height:calc(36*var(--t))}
+.confirm-cancel{background:rgba(255,255,255,.1);color:#fff;border:0;cursor:pointer;font-family:'Chakra S',sans-serif;font-weight:700;font-size:calc(9*var(--t));text-transform:uppercase}
+.confirm-cancel:hover{background:rgba(255,255,255,.18)}
+.confirm-destruct{background:#dc2626;color:#fff;border:0;cursor:pointer;font-family:'Chakra S',sans-serif;font-weight:700;font-size:calc(9*var(--t));text-transform:uppercase}
+.confirm-destruct:hover{background:#ef4444}
+
+/* ================= ENTRANCE ================= */
+:root{
+  --e-mask: cubic-bezier(.16,1,.3,1);
+  --e-line: cubic-bezier(.65,0,.35,1);
+  --e-soft: cubic-bezier(.22,.61,.36,1);
+}
+@keyframes drawX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes drawY{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes maskUp{from{transform:translateY(112%)}to{transform:translateY(0)}}
+@keyframes settle{from{opacity:0;transform:translateY(calc(7*var(--t)))}to{opacity:1;transform:none}}
+@keyframes markIn{from{transform:translateY(-50%) scaleX(0)}to{transform:translateY(-50%) scaleX(1)}}
+
+/* DRAW */
+.anim .ln-t{transform-origin:left center;animation:drawX .5s var(--e-line) .04s both}
+.anim .ln-l{transform-origin:center top;animation:drawY .5s var(--e-line) .04s both}
+.anim .ln-b{transform-origin:right center;animation:drawX .5s var(--e-line) .2s both}
+.anim .ln-r{transform-origin:center bottom;animation:drawY .5s var(--e-line) .2s both}
+.anim .cn{animation:fadeIn .3s linear .55s both}
+
+/* MASK */
+.anim .logo{overflow:hidden}
+.anim .logo .logo-text{animation:maskUp .8s var(--e-mask) .16s both}
+
+/* SETTLE */
+.anim .join-btn{animation:settle .56s var(--e-soft) .36s both}
+.anim .links{animation:fadeIn .4s linear .34s both}
+
+/* MASK headline */
+.headline .hrow{display:block;overflow:hidden}
+.headline .hrise{display:block}
+.anim .headline .hrise{animation:maskUp .9s var(--e-mask) both}
+.anim .headline .hrow:first-child .hrise{animation-delay:.42s}
+.anim .headline .hrow+.hrow .hrise{animation-delay:.52s}
+
+.anim .index{animation:fadeIn .45s linear .6s both}
+.anim .index .on::before{animation:markIn .42s var(--e-soft) .64s both}
+
+.anim .blurb{animation:settle .72s var(--e-soft) .7s both}
+.anim .cta{animation:settle .62s var(--e-soft) .86s both}
+
+/* DOCK */
+.anim .dock .rule{transform-origin:left center;animation:drawX .52s var(--e-line) .92s both}
+@keyframes settleC{from{opacity:0;transform:translate(-50%,calc(7*var(--t)))}
+                   to{opacity:1;transform:translateX(-50%)}}
+.anim .dock .copyright{animation:settleC .52s var(--e-soft) 1.02s both}
+.anim .talk{animation:settle .52s var(--e-soft) 1.08s both}
+.anim .dock-progress{animation:fadeIn .45s linear .92s both}
+.anim .dock-progress .seg-track{transform-origin:left center;animation:drawX .52s var(--e-line) .92s both}
+
+/* ---------- a11y ---------- */
+a:focus-visible,button:focus-visible{outline:calc(1.5*var(--t)) solid #e8d1cb;outline-offset:calc(3*var(--t))}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ---------- tablet ---------- */
+@media (max-width: 1152px){
+  :root{
+    --u: clamp(.8px, min(100vw / 1280, 100vh / 800), 1.1px);
+    --u: clamp(.8px, min(100vw / 1280, 100dvh / 800), 1.1px);
+    --t: max(var(--u), clamp(.9px, calc(.9px + (1152px - 100vw) * .00042), 1.12px));
+  }
+  .join-btn{width:auto;padding:0 calc(20*var(--t)) 0 calc(18*var(--t))}
+  .cta{width:auto;padding:0 calc(22*var(--t))}
+  .dock{display:flex;justify-content:space-between;align-items:stretch}
+  .dock .div{display:none}
+  .talk{position:static;height:auto;padding:0 min(calc(24*var(--t)),6vw) 0 min(calc(20*var(--t)),5vw);
+        border-left:var(--hair) solid rgba(255,255,255,.21)}
+  .links{gap:calc(15*var(--t));align-self:stretch}
+  .links a{display:flex;align-items:center;align-self:stretch}
+  .index a{padding:calc(6*var(--t)) 0}
+}
+
+@media (max-width: 1152px) and (min-aspect-ratio: 6/5){
+  .hero{padding-inline:calc(150*var(--t))}
+}
+@media (max-width: 1152px) and (max-aspect-ratio: 6/5){
+  .index{top:30%}
+  .hero{padding-inline:calc(22*var(--t))}
+}
+
+/* ---------- navigation collapse ---------- */
+@media (max-width: 830px){
+  .navset{display:none}
+}
+
+/* ---------- mobile ---------- */
+@media (max-width: 680px){
+  .holdings-cards{grid-template-columns:1fr;gap:calc(6*var(--t))}
+  .h-card{padding:calc(8*var(--t)) calc(10*var(--t))}
+}
+
+@media (max-width: 548px){
+  :root{
+    --u: clamp(.62px, min(100vw / 500, 100vh / 820), 1.1px);
+    --u: clamp(.62px, min(100vw / 500, 100dvh / 820), 1.1px);
+    --t: clamp(1.06px, calc(100vw / 489), 1.12px);
+  }
+  .frame{left:calc(18*var(--u));right:calc(18*var(--u));
+         top:calc(18*var(--u));bottom:calc(18*var(--u))}
+  .logo{left:calc(14*var(--t));top:calc(18*var(--t));width:auto;height:auto}
+  .logo-text{font-size:calc(10.5*var(--t));letter-spacing:calc(1.6*var(--t))}
+  .masthead{right:calc(8*var(--t));top:calc(12*var(--t))}
+  .join-btn{height:calc(36*var(--t));padding:0 calc(14*var(--t))}
+  
+  .index{top:calc(56*var(--t));transform:none}
+  .index li{height:calc(19*var(--t))}
+  .index a{font-size:calc(8*var(--t));letter-spacing:calc(.8*var(--t));color:rgba(232,238,250,.42)}
+  
+  .hero{bottom:max(8.5%, calc(52*var(--t)));padding-inline:calc(14*var(--t))}
+  .headline{text-wrap:balance;font-size:calc(21*var(--t));line-height:calc(24*var(--t))}
+  .blurb{max-width:calc(390*var(--t));font-size:calc(10*var(--t));line-height:calc(16.5*var(--t))}
+  .blurb br{display:none}
+  
+  .headline .hrow{display:inline;overflow:visible}
+  .headline .hrise{display:inline}
+  .anim .headline .hrise{animation:none}
+  .anim .headline{animation:settle .8s var(--e-mask) .42s both}
+  .hero .headline{
+    opacity:1;
+    transform:none;
+    transition:opacity .62s cubic-bezier(.16,1,.3,1), transform .62s var(--e-soft);
+  }
+  .swapping .headline{
+    opacity:0;
+    transform:translateY(calc(6*var(--t)));
+    transition:opacity .26s ease-in, transform .3s ease-in;
+  }
+}
+
+@media (max-width: 370px){
+  .dock{height:auto;flex-wrap:wrap}
+  .talk{flex:1 1 0;justify-content:center;height:calc(42*var(--t))}
+  .dock .copyright{position:static;transform:none;order:1;flex:1 0 100%;
+                   justify-content:center;height:calc(34*var(--t));
+                   font-size:calc(7.8*var(--t));letter-spacing:calc(1.2*var(--t));
+                   border-top:var(--hair) solid rgba(255,255,255,.13)}
+  .anim .dock .copyright{animation-name:settle}
+  .hero{bottom:calc(92*var(--t))}
+}
+
+@media (max-height: 560px),
+       (max-width: 370px) and (max-height: 640px){ .blurb{display:none} }
+
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="bg" role="img" aria-label="A stone arch standing in still water between dark mountains at dusk">
+    <video class="on" data-chapter="vision" src="assets/video/background.mp4" poster="assets/img/background.webp" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+    <video data-chapter="homes" data-src="assets/video/expression.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+    <video data-chapter="media" data-src="assets/video/craftsmanship.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+    <video data-chapter="holdings" data-src="assets/video/refinement.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+    <video data-chapter="what-are-we" data-src="assets/video/balance.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+    <video data-chapter="origin" data-src="assets/video/origin.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+  </div>
+
+  <div class="frame">
+    <span class="ln ln-t"></span><span class="ln ln-b"></span>
+    <span class="ln ln-l"></span><span class="ln ln-r"></span>
+    <span class="cn cn-tl"></span><span class="cn cn-tr"></span>
+    <span class="cn cn-bl"></span><span class="cn cn-br"></span>
+
+    <a class="logo" href="#" aria-label="Red Flag World — home">
+      <span class="logo-text">RED FLAG WORLD</span>
+    </a>
+
+    <nav class="masthead" aria-label="Main">
+      <div class="navset" id="navset">
+        <div class="links lbl">
+          <a href="#vision"><span class="t">VISION</span></a>
+          <a href="#homes"><span class="t">HOMES</span></a>
+          <a href="#media"><span class="t">MEDIA</span></a>
+          <a href="#holdings"><span class="t">HOLDINGS</span></a>
+          <a href="#what-are-we"><span class="t">ABOUT</span></a>
+          <a href="#origin"><span class="t">ORIGIN</span></a>
+        </div>
+      </div>
+      <button class="pill join-btn lbl" type="button" id="joinBtn" aria-label="Join Us" aria-haspopup="dialog">
+        <svg class="ico" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0" y="0" width="4" height="4" rx=".8"/><rect x="6" y="0" width="4" height="4" rx=".8"/><rect x="0" y="6" width="4" height="4" rx=".8"/><rect x="6" y="6" width="4" height="4" rx=".8"/></svg>
+        <span class="t">JOIN US</span>
+      </button>
+    </nav>
+
+    <ul class="index" aria-label="Sections">
+      <li class="on">
+        <a href="#vision" aria-current="true"><span class="t">VISION</span></a>
+        <div class="nav-preview" aria-hidden="true">
+          <span class="prev-tag">01 // VISION</span>
+          <span class="prev-title">One Name Across Borders</span>
+          <span class="prev-desc">A global group building hospitality, media and investment brands for a new generation.</span>
+          <span class="prev-meta">Click to explore &rarr;</span>
+        </div>
+      </li>
+      <li>
+        <a href="#homes"><span class="t">RED FLAG HOMES</span></a>
+        <div class="nav-preview" aria-hidden="true">
+          <span class="prev-tag">02 // HOSPITALITY</span>
+          <span class="prev-title">Stays With A Personality</span>
+          <span class="prev-desc">Co-hosting and managing short-stay villas and homes with end-to-end guest experiences.</span>
+          <span class="prev-meta">Click to explore &rarr;</span>
+        </div>
+      </li>
+      <li>
+        <a href="#media"><span class="t">RED FLAG MEDIA</span></a>
+        <div class="nav-preview" aria-hidden="true">
+          <span class="prev-tag">03 // MEDIA &amp; FILM</span>
+          <span class="prev-title">Stories Made For The Screen</span>
+          <span class="prev-desc">Film production, music and screen-first branded storytelling across North America.</span>
+          <span class="prev-meta">Click to explore &rarr;</span>
+        </div>
+      </li>
+      <li>
+        <a href="#holdings"><span class="t">RED FLAG WORLD HOLDINGS</span></a>
+        <div class="nav-preview" aria-hidden="true">
+          <span class="prev-tag">04 // GROUP HOLDINGS</span>
+          <span class="prev-title">One House. Every Venture.</span>
+          <span class="prev-desc">London parent company holding every Red Flag entity and active consumer investment lines.</span>
+          <span class="prev-meta">Click to explore &rarr;</span>
+        </div>
+      </li>
+      <li>
+        <a href="#what-are-we"><span class="t">WHAT ARE WE</span></a>
+        <div class="nav-preview" aria-hidden="true">
+          <span class="prev-tag">05 // IDENTITY</span>
+          <span class="prev-title">Not A Company. A World.</span>
+          <span class="prev-desc">Founders and builders creating physical and narrative spaces you can step into.</span>
+          <span class="prev-meta">Click to explore &rarr;</span>
+        </div>
+      </li>
+      <li>
+        <a href="#origin"><span class="t">ORIGIN</span></a>
+        <div class="nav-preview" aria-hidden="true">
+          <span class="prev-tag">06 // GLOBAL ROOTS</span>
+          <span class="prev-title">From The USA To India</span>
+          <span class="prev-desc">United States heritage expanding to India, taking cross-border ambition global.</span>
+          <span class="prev-meta">Click to explore &rarr;</span>
+        </div>
+      </li>
+    </ul>
+
+    <div class="hero">
+      <h1 class="headline"><span class="hrow"><span class="hrise">WHERE STAYS, STORIES </span></span><span class="hrow"><span class="hrise">AND VENTURES MEET</span></span></h1>
+      <p class="blurb"><span class="lead-line" id="heroLead">Building a world where every stay, story and venture carries one name.</span><span id="heroBody">Red Flag World is a global group building hospitality, media and investment brands for a new generation — bold, design-led and built across borders.</span></p>
+
+      <!-- Dynamic extras: Holdings cards & Origin journey map -->
+      <div class="hero-extra" id="extraHoldings">
+        <div class="holdings-cards">
+          <div class="h-card">
+            <div class="h-card-tag">HOSPITALITY</div>
+            <div class="h-card-title">Red Flag Homes Network</div>
+            <div class="h-card-desc">Short-stay homes & luxury villas managed end-to-end for owners and guests.</div>
+          </div>
+          <div class="h-card">
+            <div class="h-card-tag">MEDIA & FILM</div>
+            <div class="h-card-title">Red Flag Media LLC</div>
+            <div class="h-card-desc">Film production, music and screen-first branded storytelling across North America.</div>
+          </div>
+          <div class="h-card">
+            <div class="h-card-tag">VENTURES</div>
+            <div class="h-card-title">Upcoming Brands</div>
+            <div class="h-card-badge">COMING SOON</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-extra" id="extraOrigin">
+        <div class="origin-journey">
+          <div class="journey-map">
+            <svg viewBox="0 0 320 74" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Journey from USA to India">
+              <path d="M 45 42 Q 155 12 265 42" stroke="rgba(255,255,255,0.14)" stroke-width="1.2" stroke-linecap="round"/>
+              <path class="journey-dash" d="M 45 42 Q 155 12 265 42" stroke="url(#journeyGrad)" stroke-width="2" stroke-dasharray="6 4" stroke-linecap="round"/>
+              <g transform="translate(45, 42)">
+                <circle cx="0" cy="0" r="10" stroke="rgba(232,209,203,0.4)" stroke-width="1" fill="none" class="journey-pulse"/>
+                <circle cx="0" cy="0" r="4" fill="#e8d1cb"/>
+                <circle cx="0" cy="0" r="1.8" fill="#15131b"/>
+                <text x="0" y="20" text-anchor="middle" fill="#ffffff" font-family="'Chakra S','Chakra Petch',sans-serif" font-weight="700" font-size="8.5" letter-spacing="1">USA</text>
+              </g>
+              <g transform="translate(155, 23)">
+                <circle cx="0" cy="0" r="2.5" fill="#e8d1cb"/>
+              </g>
+              <g transform="translate(265, 42)">
+                <circle cx="0" cy="0" r="12" stroke="rgba(232,209,203,0.5)" stroke-width="1" fill="none" class="journey-pulse" style="animation-delay:0.8s"/>
+                <circle cx="0" cy="0" r="4.5" fill="#e8d1cb"/>
+                <circle cx="0" cy="0" r="2" fill="#15131b"/>
+                <text x="0" y="20" text-anchor="middle" fill="#ffffff" font-family="'Chakra S','Chakra Petch',sans-serif" font-weight="700" font-size="8.5" letter-spacing="1">INDIA</text>
+              </g>
+              <defs>
+                <linearGradient id="journeyGrad" x1="45" y1="42" x2="265" y2="42" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.5"/>
+                  <stop offset="50%" stop-color="#e8d1cb" stop-opacity="1"/>
+                  <stop offset="100%" stop-color="#ffffff" stop-opacity="0.9"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="journey-caption">GLOBAL ROOTS &bull; USA TO INDIA EXPANSION</div>
+        </div>
+      </div>
+
+      <button class="cta lbl" type="button" id="newsletterBtn" aria-label="Subscribe to newsletter" aria-haspopup="dialog">
+        <span class="cta-glass"></span>
+        <svg class="cta-edge" viewBox="0 0 190 41" preserveAspectRatio="none" aria-hidden="true"><path d="M3.5.5 H179.5 L189.5 10.5 V37.5 L186.5 40.5 H10.5 L.5 30.5 V3.5 Z" vector-effect="non-scaling-stroke"/></svg>
+        <span class="cta-in">
+          <svg class="ico" viewBox="0 0 7 11" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0" y="0" width="4" height="5"/><rect x="3" y="4" width="4" height="4"/><rect x="0" y="7" width="4" height="4"/></svg>
+          <span class="t">SUBSCRIBE TO NEWSLETTER</span>
+        </span>
+      </button>
+    </div>
+
+    <div class="dock">
+      <span class="rule"></span><span class="div div-l"></span><span class="div div-r"></span>
+
+      <div class="dock-progress" role="progressbar" aria-label="Section progression" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" aria-valuetext="Section 1 of 6: VISION">
+        <div class="prog-segments" role="tablist" aria-label="Sections">
+          <button type="button" class="prog-seg on" data-index="0" data-chapter="vision" role="tab" aria-selected="true" aria-label="Section 1 of 6: Vision">
+            <span class="seg-track"></span>
+            <span class="seg-info lbl">
+              <span class="seg-idx">01</span>
+              <span class="seg-sep">/</span>
+              <span class="seg-name"><span class="t">VISION</span></span>
+            </span>
+          </button>
+          <button type="button" class="prog-seg" data-index="1" data-chapter="homes" role="tab" aria-selected="false" aria-label="Section 2 of 6: Red Flag Homes">
+            <span class="seg-track"></span>
+            <span class="seg-info lbl">
+              <span class="seg-idx">02</span>
+              <span class="seg-sep">/</span>
+              <span class="seg-name"><span class="t">HOMES</span></span>
+            </span>
+          </button>
+          <button type="button" class="prog-seg" data-index="2" data-chapter="media" role="tab" aria-selected="false" aria-label="Section 3 of 6: Red Flag Media">
+            <span class="seg-track"></span>
+            <span class="seg-info lbl">
+              <span class="seg-idx">03</span>
+              <span class="seg-sep">/</span>
+              <span class="seg-name"><span class="t">MEDIA</span></span>
+            </span>
+          </button>
+          <button type="button" class="prog-seg" data-index="3" data-chapter="holdings" role="tab" aria-selected="false" aria-label="Section 4 of 6: Red Flag World Holdings">
+            <span class="seg-track"></span>
+            <span class="seg-info lbl">
+              <span class="seg-idx">04</span>
+              <span class="seg-sep">/</span>
+              <span class="seg-name"><span class="t">HOLDINGS</span></span>
+            </span>
+          </button>
+          <button type="button" class="prog-seg" data-index="4" data-chapter="what-are-we" role="tab" aria-selected="false" aria-label="Section 5 of 6: What Are We">
+            <span class="seg-track"></span>
+            <span class="seg-info lbl">
+              <span class="seg-idx">05</span>
+              <span class="seg-sep">/</span>
+              <span class="seg-name"><span class="t">WHAT ARE WE</span></span>
+            </span>
+          </button>
+          <button type="button" class="prog-seg" data-index="5" data-chapter="origin" role="tab" aria-selected="false" aria-label="Section 6 of 6: Origin">
+            <span class="seg-track"></span>
+            <span class="seg-info lbl">
+              <span class="seg-idx">06</span>
+              <span class="seg-sep">/</span>
+              <span class="seg-name"><span class="t">ORIGIN</span></span>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <div class="copyright lbl">
+        <span class="t">© 2026 Red Flag Media LLC. All rights reserved.</span>
+      </div>
+
+      <a class="talk lbl" href="#talk" id="talkBtn" aria-label="Talk with us" aria-haspopup="dialog">
+        <span class="t">TALK WITH US</span>
+        <svg class="ico" viewBox="0 0 16 15" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M8 .8 C12 .8 15.2 3.8 15.2 7.4 C15.2 11 12 14 8 14 C6.6 14 5.3 13.6 4.2 13 L.9 13.9 L1.9 10.9 C1.2 9.9 .8 8.7 .8 7.4 C.8 3.8 4 .8 8 .8 Z"/>
+          <g fill="currentColor" stroke="none"><circle cx="5.2" cy="7.4" r=".95"/><circle cx="8" cy="7.4" r=".95"/><circle cx="10.8" cy="7.4" r=".95"/></g>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Join Us Modal -->
+  <div class="modal-overlay" id="joinModal" role="dialog" aria-modal="true" aria-labelledby="joinTitle">
+    <div class="modal-box">
+      <button class="modal-close" type="button" aria-label="Close modal" data-close="joinModal">
+        <svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1 1L13 13M1 13L13 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <div class="modal-head">
+        <div class="modal-tag">RED FLAG WORLD &bull; CONNECT</div>
+        <h2 class="modal-title" id="joinTitle">JOIN US</h2>
+        <p class="modal-sub">Partner, invest, or build with Red Flag World across hospitality, media and ventures.</p>
+      </div>
+      <form class="modal-form" id="joinForm">
+        <div class="form-field">
+          <label class="form-label" for="joinName">Full Name</label>
+          <input class="form-input" id="joinName" type="text" placeholder="Your name" required autocomplete="name">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="joinEmail">Email Address</label>
+          <input class="form-input" id="joinEmail" type="email" placeholder="name@domain.com" required autocomplete="email">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="joinPhone">Phone Number</label>
+          <input class="form-input" id="joinPhone" type="tel" placeholder="+1 (555) 000-0000" autocomplete="tel">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="joinInterest">I'm interested in</label>
+          <select class="form-select" id="joinInterest" required>
+            <option value="Partnering">Partnering</option>
+            <option value="Investing">Investing</option>
+            <option value="Working with us">Working with us</option>
+            <option value="Hosting my property">Hosting my property</option>
+          </select>
+        </div>
+        <button class="form-submit" type="submit">Submit Inquiry</button>
+      </form>
+      <div class="form-success" id="joinSuccess">
+        <svg class="success-ico" viewBox="0 0 24 24"><path d="M20 6L9 17L4 12"/></svg>
+        <div class="success-title">INQUIRY RECEIVED</div>
+        <p class="success-msg">Thank you. A member of the Red Flag World team will review your inquiry and connect with you shortly.</p>
+        <div id="joinSyncStatus" class="sheet-sync-pill" style="margin:calc(10*var(--t)) auto 0;display:none">● SYNCED LIVE TO GOOGLE SHEET</div>
+        <div style="display:flex;gap:calc(8*var(--t));justify-content:center;margin-top:calc(14*var(--t));flex-wrap:wrap">
+          <button class="form-submit" type="button" data-close="joinModal" style="margin:0;width:auto;padding:0 calc(16*var(--t))">Return to Site</button>
+          <button class="form-submit" type="button" id="viewInSheetsFromJoin" style="margin:0;width:auto;padding:0 calc(16*var(--t));background:rgba(255,255,255,.1);color:#fff">Open Sheets Hub</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Newsletter Modal -->
+  <div class="modal-overlay" id="newsletterModal" role="dialog" aria-modal="true" aria-labelledby="newsTitle">
+    <div class="modal-box">
+      <button class="modal-close" type="button" aria-label="Close modal" data-close="newsletterModal">
+        <svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1 1L13 13M1 13L13 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <div class="modal-head">
+        <div class="modal-tag">DISPATCHES &bull; RED FLAG WORLD</div>
+        <h2 class="modal-title" id="newsTitle">SUBSCRIBE</h2>
+        <p class="modal-sub">Stay ahead of global property drops, film releases, and investment updates.</p>
+      </div>
+      <form class="modal-form" id="newsletterForm">
+        <div class="form-field">
+          <label class="form-label" for="newsEmail">Email Address</label>
+          <input class="form-input" id="newsEmail" type="email" placeholder="name@domain.com" required autocomplete="email">
+        </div>
+        <button class="form-submit" type="submit">Subscribe</button>
+      </form>
+      <div class="form-success" id="newsletterSuccess">
+        <svg class="success-ico" viewBox="0 0 24 24"><path d="M20 6L9 17L4 12"/></svg>
+        <div class="success-title">WELCOME TO THE SIGNAL</div>
+        <p class="success-msg">You have been subscribed to Red Flag World dispatches. Only essential updates, no noise.</p>
+        <div id="newsletterSyncStatus" class="sheet-sync-pill" style="margin:calc(10*var(--t)) auto 0;display:none">● SYNCED LIVE TO GOOGLE SHEET</div>
+        <div style="display:flex;gap:calc(8*var(--t));justify-content:center;margin-top:calc(14*var(--t));flex-wrap:wrap">
+          <button class="form-submit" type="button" data-close="newsletterModal" style="margin:0;width:auto;padding:0 calc(16*var(--t))">Done</button>
+          <button class="form-submit" type="button" id="viewInSheetsFromNews" style="margin:0;width:auto;padding:0 calc(16*var(--t));background:rgba(255,255,255,.1);color:#fff">Open Sheets Hub</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Google Sheets Hub Modal -->
+  <div class="modal-overlay" id="sheetsModal" role="dialog" aria-modal="true" aria-labelledby="sheetsTitle">
+    <div class="modal-box sheets-modal-box">
+      <button class="modal-close" type="button" aria-label="Close modal" data-close="sheetsModal">
+        <svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1 1L13 13M1 13L13 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <div class="modal-head">
+        <div class="modal-tag">GOOGLE WORKSPACE &bull; LIVE SHEETS INTEGRATION</div>
+        <h2 class="modal-title" id="sheetsTitle">GOOGLE SHEETS HUB</h2>
+        <p class="modal-sub">Real-time sync for inquiries, partners, and newsletter subscribers directly to your Google Drive spreadsheet.</p>
+      </div>
+
+      <!-- Account Connection Card -->
+      <div class="sheets-card" id="sheetsAuthCard">
+        <div class="sheets-card-head">
+          <div class="sheets-card-title">
+            <svg viewBox="0 0 16 16" fill="currentColor" style="width:16px;height:16px;color:#4ade80"><path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM4 3h8v2H4V3zm0 4h8v2H4V7zm0 4h8v2H4v-2z"/></svg>
+            Google Account Status
+          </div>
+          <span class="sheets-status-tag tag-offline" id="sheetsStatusTag">
+            <span class="pulse-dot" style="background:#8e918f;box-shadow:none"></span> DISCONNECTED
+          </span>
+        </div>
+
+        <div id="sheetsLoggedOutView">
+          <p style="font-size:calc(10*var(--t));color:rgba(224,232,245,.75);margin:0 0 calc(12*var(--t)) 0;line-height:1.45">
+            Connect your Google account to automatically store and manage all incoming leads, stay host applications, and subscriber lists in a live Google Sheet.
+          </p>
+          <button class="gsi-material-button" id="googleSignInBtn" type="button">
+            <div class="gsi-material-button-state"></div>
+            <div class="gsi-material-button-content-wrapper">
+              <div class="gsi-material-button-icon">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" style="display: block;">
+                  <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
+                  <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
+                  <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path>
+                  <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
+                  <path fill="none" d="M0 0h48v48H0z"></path>
+                </svg>
+              </div>
+              <span class="gsi-material-button-contents">Sign in with Google</span>
+            </div>
+          </button>
+        </div>
+
+        <div id="sheetsLoggedInView" style="display:none">
+          <div class="sheets-user-row">
+            <div class="sheets-user-info">
+              <img id="sheetsUserAvatar" class="sheets-avatar" src="" alt="Google User" style="display:none">
+              <div>
+                <div class="sheets-name" id="sheetsUserName">Google User</div>
+                <div class="sheets-email" id="sheetsUserEmail">user@gmail.com</div>
+              </div>
+            </div>
+            <button class="sheets-btn-sm" id="googleSignOutBtn" type="button">Sign Out</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Spreadsheet Card -->
+      <div class="sheets-card" id="sheetsFileCard" style="display:none">
+        <div class="sheets-card-head">
+          <div class="sheets-card-title">
+            <span>Linked Spreadsheet</span>
+          </div>
+          <div class="active-sheet-actions">
+            <button class="sheets-btn-sm" id="refreshSheetBtn" type="button">↻ Refresh</button>
+            <button class="sheets-btn-sm" id="createSheetBtn" type="button">+ New Sheet</button>
+            <a class="sheets-btn-sm" id="openExternalSheetBtn" href="#" target="_blank" rel="noopener noreferrer">Open in Sheets ↗</a>
+          </div>
+        </div>
+        <div class="active-sheet-info">
+          <div>
+            <div class="active-sheet-title" id="activeSheetName">Red Flag World — Inquiries &amp; Leads</div>
+            <div style="font-size:calc(8.5*var(--t));color:rgba(224,232,245,.6);margin-top:calc(3*var(--t))" id="activeSheetIdLabel">ID: Loading...</div>
+          </div>
+          <span class="sheet-sync-pill">● LIVE DRIVE SYNC ACTIVE</span>
+        </div>
+
+        <!-- Table View -->
+        <div class="sheets-table-wrap">
+          <table class="sheets-table" id="submissionsTable">
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>Type</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Interest</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="submissionsTableBody">
+              <tr>
+                <td colspan="7" style="text-align:center;padding:calc(16*var(--t));color:rgba(224,232,245,.5)">
+                  Loading submissions from Google Sheets...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Action bar -->
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:calc(12*var(--t));flex-wrap:wrap;gap:calc(8*var(--t))">
+          <button class="sheets-btn-sm" id="addTestEntryBtn" type="button">+ Append Test Row</button>
+          <button class="sheets-btn-sm sheets-btn-danger" id="clearSheetDataBtn" type="button">🗑 Clear Sheet Data</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- User Confirmation Dialog for Destructive Operations -->
+  <div class="modal-overlay" id="confirmModal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+    <div class="modal-box confirm-box">
+      <div class="modal-head" style="margin-bottom:calc(10*var(--t))">
+        <div class="modal-tag" style="color:#f87171">WARNING &bull; MUTATING ACTION</div>
+        <h3 class="modal-title" id="confirmTitle" style="font-size:calc(15*var(--t))">CLEAR SPREADSHEET ENTRIES?</h3>
+      </div>
+      <p style="font-size:calc(10*var(--t));color:rgba(224,232,245,.85);line-height:1.45;margin:0">
+        Are you sure you want to clear all submission rows from <strong id="confirmSheetTarget" style="color:#fff">"Red Flag World — Inquiries & Leads"</strong>? This will permanently erase the data rows in your Google Sheet in Google Drive.
+      </p>
+      <div class="confirm-actions">
+        <button class="confirm-cancel" id="cancelConfirmBtn" type="button">Cancel</button>
+        <button class="confirm-destruct" id="executeConfirmBtn" type="button">Confirm &amp; Clear</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js';
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js';
+
+/* ---------------------------------------------------------------
+   FIREBASE & GOOGLE WORKSPACE OAUTH CONFIGURATION
+---------------------------------------------------------------- */
+const firebaseConfig = {
+  projectId: "gen-lang-client-0141427722",
+  appId: "1:129544286433:web:0d0d630f1821f1398b87a0",
+  apiKey: "AIzaSyA73ZunjtMk2snaH111_nqFrHpF8Sb1WCY",
+  authDomain: "gen-lang-client-0141427722.firebaseapp.com",
+  storageBucket: "gen-lang-client-0141427722.firebasestorage.app",
+  messagingSenderId: "129544286433",
+  measurementId: "",
+  oAuthClientId: "129544286433-earkef8f8qpjngnlkslf1h70nj60veuh.apps.googleusercontent.com",
+  recaptchaSiteKey: ""
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+const provider = new GoogleAuthProvider();
+provider.addScope('https://www.googleapis.com/auth/drive');
+provider.addScope('https://www.googleapis.com/auth/drive.file');
+provider.addScope('https://www.googleapis.com/auth/drive.readonly');
+provider.addScope('https://www.googleapis.com/auth/spreadsheets');
+provider.addScope('https://www.googleapis.com/auth/spreadsheets.readonly');
+
+// In-memory token management
+let cachedAccessToken = null;
+let currentUser = null;
+let activeSpreadsheet = null;
+let isSigningIn = false;
+
+// DOM elements
+const sheetsLoggedOutView = document.getElementById('sheetsLoggedOutView');
+const sheetsLoggedInView = document.getElementById('sheetsLoggedInView');
+const sheetsStatusTag = document.getElementById('sheetsStatusTag');
+const sheetsUserAvatar = document.getElementById('sheetsUserAvatar');
+const sheetsUserName = document.getElementById('sheetsUserName');
+const sheetsUserEmail = document.getElementById('sheetsUserEmail');
+const sheetsFileCard = document.getElementById('sheetsFileCard');
+const activeSheetName = document.getElementById('activeSheetName');
+const activeSheetIdLabel = document.getElementById('activeSheetIdLabel');
+const openExternalSheetBtn = document.getElementById('openExternalSheetBtn');
+const submissionsTableBody = document.getElementById('submissionsTableBody');
+
+function updateAuthUI() {
+  if (currentUser && cachedAccessToken) {
+    if (sheetsLoggedOutView) sheetsLoggedOutView.style.display = 'none';
+    if (sheetsLoggedInView) sheetsLoggedInView.style.display = 'block';
+    if (sheetsFileCard) sheetsFileCard.style.display = 'block';
+    if (sheetsStatusTag) {
+      sheetsStatusTag.className = 'sheets-status-tag tag-online';
+      sheetsStatusTag.innerHTML = '<span class="pulse-dot"></span> CONNECTED';
+    }
+    if (sheetsUserName) sheetsUserName.textContent = currentUser.displayName || 'Google Workspace User';
+    if (sheetsUserEmail) sheetsUserEmail.textContent = currentUser.email || '';
+    if (sheetsUserAvatar && currentUser.photoURL) {
+      sheetsUserAvatar.src = currentUser.photoURL;
+      sheetsUserAvatar.style.display = 'block';
+    }
+    const syncPill = document.querySelector('.sheets-pill');
+    if (syncPill) syncPill.style.borderColor = 'rgba(74,222,128,.6)';
+  } else {
+    if (sheetsLoggedOutView) sheetsLoggedOutView.style.display = 'block';
+    if (sheetsLoggedInView) sheetsLoggedInView.style.display = 'none';
+    if (sheetsFileCard) sheetsFileCard.style.display = 'none';
+    if (sheetsStatusTag) {
+      sheetsStatusTag.className = 'sheets-status-tag tag-offline';
+      sheetsStatusTag.innerHTML = '<span class="pulse-dot" style="background:#8e918f;box-shadow:none"></span> DISCONNECTED';
+    }
+  }
+}
+
+onAuthStateChanged(auth, async (user) => {
+  currentUser = user;
+  if (!user) {
+    cachedAccessToken = null;
+    activeSpreadsheet = null;
+    updateAuthUI();
+  } else if (!cachedAccessToken && !isSigningIn) {
+    updateAuthUI();
+  }
+});
+
+async function googleSignIn() {
+  try {
+    isSigningIn = true;
+    const result = await signInWithPopup(auth, provider);
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    if (!credential?.accessToken) {
+      throw new Error('Failed to obtain Google access token');
+    }
+    cachedAccessToken = credential.accessToken;
+    currentUser = result.user;
+    updateAuthUI();
+    await initSpreadsheet();
+  } catch (err) {
+    console.error('Google Sign In error:', err);
+    alert('Google Sign In failed: ' + (err.message || 'Please check popup settings.'));
+  } finally {
+    isSigningIn = false;
+  }
+}
+
+async function googleSignOut() {
+  await signOut(auth);
+  cachedAccessToken = null;
+  currentUser = null;
+  activeSpreadsheet = null;
+  updateAuthUI();
+}
+
+async function initSpreadsheet() {
+  if (!cachedAccessToken) return;
+  try {
+    if (submissionsTableBody) {
+      submissionsTableBody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:calc(16*var(--t));color:rgba(224,232,245,.6)">Checking Google Drive for spreadsheet...</td></tr>';
+    }
+    const q = encodeURIComponent("name = 'Red Flag World — Inquiries & Leads' and mimeType = 'application/vnd.google-apps.spreadsheet' and trashed = false");
+    const driveRes = await fetch(`https://www.googleapis.com/drive/v3/files?q=${q}&fields=files(id,name)&pageSize=1`, {
+      headers: { Authorization: `Bearer ${cachedAccessToken}` }
+    });
+    const driveData = await driveRes.json();
+    if (driveData.files && driveData.files.length > 0) {
+      activeSpreadsheet = driveData.files[0];
+    } else {
+      activeSpreadsheet = await createNewSpreadsheet('Red Flag World — Inquiries & Leads');
+    }
+    if (activeSpreadsheet) {
+      if (activeSheetName) activeSheetName.textContent = activeSpreadsheet.name;
+      if (activeSheetIdLabel) activeSheetIdLabel.textContent = 'ID: ' + activeSpreadsheet.id.slice(0, 16) + '...';
+      if (openExternalSheetBtn) {
+        openExternalSheetBtn.href = `https://docs.google.com/spreadsheets/d/${activeSpreadsheet.id}/edit`;
+      }
+      await loadSheetData();
+    }
+  } catch (err) {
+    console.error('Spreadsheet init error:', err);
+    if (submissionsTableBody) {
+      submissionsTableBody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:calc(14*var(--t));color:#f87171">Failed to load spreadsheet: ${err.message || 'Unknown error'}</td></tr>`;
+    }
+  }
+}
+
+async function createNewSpreadsheet(title) {
+  if (!cachedAccessToken) return null;
+  const res = await fetch('https://sheets.googleapis.com/v4/spreadsheets', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${cachedAccessToken}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      properties: { title: title },
+      sheets: [
+        {
+          properties: { title: 'Inquiries', gridProperties: { frozenRowCount: 1 } },
+          data: [
+            {
+              startRow: 0,
+              startColumn: 0,
+              rowData: [
+                {
+                  values: [
+                    { userEnteredValue: { stringValue: 'Timestamp' } },
+                    { userEnteredValue: { stringValue: 'Type' } },
+                    { userEnteredValue: { stringValue: 'Name' } },
+                    { userEnteredValue: { stringValue: 'Email' } },
+                    { userEnteredValue: { stringValue: 'Phone' } },
+                    { userEnteredValue: { stringValue: 'Interest / Category' } },
+                    { userEnteredValue: { stringValue: 'Status' } }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    })
+  });
+  if (!res.ok) {
+    const errorText = await res.text();
+    throw new Error('Could not create spreadsheet: ' + errorText);
+  }
+  const data = await res.json();
+  return { id: data.spreadsheetId, name: title };
+}
+
+async function loadSheetData() {
+  if (!cachedAccessToken || !activeSpreadsheet) return;
+  try {
+    const metaRes = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${activeSpreadsheet.id}?fields=sheets.properties`, {
+      headers: { Authorization: `Bearer ${cachedAccessToken}` }
+    });
+    const meta = await metaRes.json();
+    const sheetName = (meta.sheets && meta.sheets[0] && meta.sheets[0].properties.title) || 'Inquiries';
+
+    const valRes = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${activeSpreadsheet.id}/values/${encodeURIComponent(sheetName)}!A2:G100`, {
+      headers: { Authorization: `Bearer ${cachedAccessToken}` }
+    });
+    const valData = await valRes.json();
+    renderTableRows(valData.values || []);
+  } catch (err) {
+    console.error('Failed reading rows:', err);
+    if (submissionsTableBody) {
+      submissionsTableBody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:calc(14*var(--t));color:#f87171">Error fetching data: ${err.message}</td></tr>`;
+    }
+  }
+}
+
+function renderTableRows(rows) {
+  if (!submissionsTableBody) return;
+  if (!rows || rows.length === 0) {
+    submissionsTableBody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:calc(18*var(--t));color:rgba(224,232,245,.5)">No inquiries logged yet. Submit via Join Us or Newsletter to test real-time sync!</td></tr>';
+    return;
+  }
+  let html = '';
+  const reversed = rows.slice().reverse();
+  reversed.forEach(row => {
+    const time = row[0] || '-';
+    const type = row[1] || 'Inquiry';
+    const name = row[2] || '-';
+    const email = row[3] || '-';
+    const phone = row[4] || '-';
+    const interest = row[5] || '-';
+    const status = row[6] || 'New';
+    html += `<tr>
+      <td>${time}</td>
+      <td><span class="sheet-badge-type">${type}</span></td>
+      <td style="color:#fff;font-weight:600">${name}</td>
+      <td>${email}</td>
+      <td>${phone}</td>
+      <td>${interest}</td>
+      <td><span style="color:#4ade80">${status}</span></td>
+    </tr>`;
+  });
+  submissionsTableBody.innerHTML = html;
+}
+
+async function appendEntryToSheet(entry) {
+  if (!cachedAccessToken || !activeSpreadsheet) {
+    return false;
+  }
+  try {
+    const metaRes = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${activeSpreadsheet.id}?fields=sheets.properties`, {
+      headers: { Authorization: `Bearer ${cachedAccessToken}` }
+    });
+    const meta = await metaRes.json();
+    const sheetName = (meta.sheets && meta.sheets[0] && meta.sheets[0].properties.title) || 'Inquiries';
+
+    const row = [
+      new Date().toLocaleString('en-US', { dateStyle: 'short', timeStyle: 'short' }),
+      entry.type,
+      entry.name || '-',
+      entry.email || '-',
+      entry.phone || '-',
+      entry.interest || '-',
+      'New'
+    ];
+
+    const res = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${activeSpreadsheet.id}/values/${encodeURIComponent(sheetName)}!A:G:append?valueInputOption=USER_ENTERED`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${cachedAccessToken}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ values: [row] })
+    });
+    if (res.ok) {
+      loadSheetData();
+      return true;
+    }
+  } catch (err) {
+    console.error('Append to sheet failed:', err);
+  }
+  return false;
+}
+
+// User Confirmation for Destructive Operations (MANDATORY WORKSPACE INTEGRATION REQUIREMENT)
+let pendingDestructiveAction = null;
+function requestUserDestructiveConfirmation(sheetTitle, actionCallback) {
+  const confirmSheetTarget = document.getElementById('confirmSheetTarget');
+  if (confirmSheetTarget) confirmSheetTarget.textContent = `"${sheetTitle}"`;
+  pendingDestructiveAction = actionCallback;
+  openModal('confirmModal');
+}
+
+const cancelConfirmBtn = document.getElementById('cancelConfirmBtn');
+if (cancelConfirmBtn) {
+  cancelConfirmBtn.addEventListener('click', () => {
+    pendingDestructiveAction = null;
+    closeModal('confirmModal');
+  });
+}
+
+const executeConfirmBtn = document.getElementById('executeConfirmBtn');
+if (executeConfirmBtn) {
+  executeConfirmBtn.addEventListener('click', async () => {
+    if (pendingDestructiveAction) {
+      const action = pendingDestructiveAction;
+      pendingDestructiveAction = null;
+      closeModal('confirmModal');
+      await action();
+    }
+  });
+}
+
+async function executeClearSheet() {
+  if (!cachedAccessToken || !activeSpreadsheet) return;
+  try {
+    const metaRes = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${activeSpreadsheet.id}?fields=sheets.properties`, {
+      headers: { Authorization: `Bearer ${cachedAccessToken}` }
+    });
+    const meta = await metaRes.json();
+    const sheetName = (meta.sheets && meta.sheets[0] && meta.sheets[0].properties.title) || 'Inquiries';
+
+    const clearRes = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${activeSpreadsheet.id}/values/${encodeURIComponent(sheetName)}!A2:G100:clear`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${cachedAccessToken}` }
+    });
+    if (clearRes.ok) {
+      await loadSheetData();
+    }
+  } catch (err) {
+    alert('Clear failed: ' + err.message);
+  }
+}
+
+// Button click listeners
+const googleSignInBtn = document.getElementById('googleSignInBtn');
+if (googleSignInBtn) googleSignInBtn.addEventListener('click', googleSignIn);
+
+const googleSignOutBtn = document.getElementById('googleSignOutBtn');
+if (googleSignOutBtn) googleSignOutBtn.addEventListener('click', googleSignOut);
+
+const refreshSheetBtn = document.getElementById('refreshSheetBtn');
+if (refreshSheetBtn) refreshSheetBtn.addEventListener('click', loadSheetData);
+
+const createSheetBtn = document.getElementById('createSheetBtn');
+if (createSheetBtn) {
+  createSheetBtn.addEventListener('click', async () => {
+    const title = prompt('Enter a title for the new Google Sheet:', 'Red Flag World — Leads (' + new Date().toLocaleDateString() + ')');
+    if (!title) return;
+    try {
+      activeSpreadsheet = await createNewSpreadsheet(title);
+      if (activeSheetName) activeSheetName.textContent = activeSpreadsheet.name;
+      if (activeSheetIdLabel) activeSheetIdLabel.textContent = 'ID: ' + activeSpreadsheet.id.slice(0, 16) + '...';
+      if (openExternalSheetBtn) openExternalSheetBtn.href = `https://docs.google.com/spreadsheets/d/${activeSpreadsheet.id}/edit`;
+      await loadSheetData();
+    } catch (err) {
+      alert('Could not create sheet: ' + err.message);
+    }
+  });
+}
+
+const addTestEntryBtn = document.getElementById('addTestEntryBtn');
+if (addTestEntryBtn) {
+  addTestEntryBtn.addEventListener('click', async () => {
+    const res = await appendEntryToSheet({
+      type: 'Direct Inquiry',
+      name: 'Sample Investor',
+      email: 'investor@redflag.world',
+      phone: '+1 415-555-0192',
+      interest: 'Investing'
+    });
+    if (!res && !cachedAccessToken) {
+      alert('Sign in with Google first to connect and append to your Google Sheet.');
+    }
+  });
+}
+
+const clearSheetDataBtn = document.getElementById('clearSheetDataBtn');
+if (clearSheetDataBtn) {
+  clearSheetDataBtn.addEventListener('click', () => {
+    if (!activeSpreadsheet) return;
+    requestUserDestructiveConfirmation(activeSpreadsheet.name, executeClearSheet);
+  });
+}
+
+const sheetsNavBtn = document.getElementById('sheetsNavBtn');
+if (sheetsNavBtn) sheetsNavBtn.addEventListener('click', () => openModal('sheetsModal'));
+
+const sheetsLink = document.getElementById('sheetsLink');
+if (sheetsLink) sheetsLink.addEventListener('click', (e) => {
+  e.preventDefault();
+  openModal('sheetsModal');
+});
+
+const viewInSheetsFromJoin = document.getElementById('viewInSheetsFromJoin');
+if (viewInSheetsFromJoin) viewInSheetsFromJoin.addEventListener('click', () => {
+  closeModal('joinModal');
+  openModal('sheetsModal');
+});
+
+const viewInSheetsFromNews = document.getElementById('viewInSheetsFromNews');
+if (viewInSheetsFromNews) viewInSheetsFromNews.addEventListener('click', () => {
+  closeModal('newsletterModal');
+  openModal('sheetsModal');
+});
+
+/* ---------------------------------------------------------------
+   1. DECODE LABELS
+---------------------------------------------------------------- */
+const RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+const CH = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const DUR = 400;
+
+const labels = [].slice.call(document.querySelectorAll('.t'));
+labels.forEach(el => { el.dataset.text = el.textContent; });
+
+function reserve() {
+  const w = [];
+  labels.forEach(el => { el.style.width = ''; });
+  labels.forEach(el => { w.push(el.getBoundingClientRect().width); });
+  labels.forEach((el, i) => {
+    if (w[i] > 0) {
+      el.style.width = (Math.ceil(w[i] * 100) / 100) + 'px';
+    }
+  });
+}
+
+function settle(el) {
+  if (el._raf) { cancelAnimationFrame(el._raf); el._raf = 0; }
+  if (el._t) { clearTimeout(el._t); el._t = 0; }
+  el.textContent = el.dataset.text;
+}
+
+function decode(el, dur) {
+  const text = el.dataset.text || '', n = text.length;
+  if (RM) { settle(el); return; }
+  settle(el);
+  const D = dur || DUR;
+  const t0 = performance.now();
+  let lastRoll = 0;
+  const rand = new Array(n);
+  function roll() { for (let i = 0; i < n; i++) rand[i] = CH.charAt((Math.random() * 26) | 0); }
+  roll();
+  function step(now) {
+    const p = Math.min(1, (now - t0) / D), front = p * n;
+    let out = '';
+    if (now - lastRoll > 45) { roll(); lastRoll = now; }
+    for (let i = 0; i < n; i++) {
+      const c = text.charAt(i);
+      if (i < front) out += c;
+      else if (i < front + 3.6) out += (c === ' ' ? ' ' : rand[i]);
+      else break;
+    }
+    el.textContent = out;
+    if (p < 1) el._raf = requestAnimationFrame(step); else settle(el);
+  }
+  el._raf = requestAnimationFrame(step);
+  el._t = setTimeout(() => settle(el), D + 500);
+}
+
+[].forEach.call(document.querySelectorAll('a, button'), el => {
+  const t = el.querySelector('.t');
+  if (!t) return;
+  el.addEventListener('pointerenter', () => decode(t));
+});
+
+/* ---------------------------------------------------------------
+   2. SCENE PARALLAX
+---------------------------------------------------------------- */
+const bg = document.querySelector('.bg');
+let tx = 0, ty = 0, cx = 0, cy = 0, running = false;
+
+function tick() {
+  cx += (tx - cx) * 0.045;
+  cy += (ty - cy) * 0.045;
+  const w = innerWidth, h = innerHeight;
+  const dx = -cx * w * 0.0156, dy = -cy * h * 0.015;
+  const cover = 2 * Math.max(Math.abs(dx) / w, Math.abs(dy) / h);
+  const sc = 1 + cover + 0.014 * Math.max(0, cy);
+  bg.style.transform = `translate3d(${dx.toFixed(2)}px,${dy.toFixed(2)}px,0) scale(${sc.toFixed(4)})`;
+  if (Math.abs(tx - cx) < 0.0004 && Math.abs(ty - cy) < 0.0004) { running = false; return; }
+  requestAnimationFrame(tick);
+}
+function wake() { if (!running && !RM) { running = true; requestAnimationFrame(tick); } }
+
+window.addEventListener('pointermove', e => {
+  if (e.pointerType === 'touch') return;
+  tx = (e.clientX / innerWidth) * 2 - 1;
+  ty = (e.clientY / innerHeight) * 2 - 1;
+  wake();
+}, { passive: true });
+document.addEventListener('pointerleave', () => { tx = 0; ty = 0; wake(); });
+
+/* ---------------------------------------------------------------
+   3. CHAPTERS & CONTENT
+---------------------------------------------------------------- */
+const COPY = {
+  vision: {
+    headline: ['WHERE STAYS, STORIES ', 'AND VENTURES MEET'],
+    lead: 'Building a world where every stay, story and venture carries one name.',
+    text: 'Red Flag World is a global group building hospitality, media and investment brands for a new generation — bold, design-led and built across borders.',
+    extra: null
+  },
+  homes: {
+    headline: ['STAYS WITH A ', 'PERSONALITY.'],
+    lead: '',
+    text: 'Red Flag Homes Network is our hospitality arm. We co-host and manage short-stay homes and villas, handling everything from design and setup to guest experience, so owners earn more and guests remember where they stayed.',
+    extra: null
+  },
+  media: {
+    headline: ['STORIES MADE ', 'FOR THE SCREEN.'],
+    lead: '',
+    text: 'Red Flag Media LLC is the media branch of Red Flag Homes, operating across the USA and Canada. It runs our North American hospitality presence and our film production division, producing movies, music and branded content.',
+    extra: null
+  },
+  holdings: {
+    headline: ['ONE HOUSE. ', 'EVERY VENTURE.'],
+    lead: '',
+    text: 'Red Flag World Holdings Ltd (London) is the parent company that holds every Red Flag business and our full investment line-up — from hospitality and media to new consumer brands in development.',
+    extra: 'extraHoldings'
+  },
+  'what-are-we': {
+    headline: ['NOT A COMPANY. ', 'A WORLD.'],
+    lead: '',
+    text: 'We are founders, creators and builders who believe a brand should feel like a place you can step into. Red Flag is the signal to stop scrolling and pay attention — in how we host, what we film and where we invest.',
+    extra: null
+  },
+  origin: {
+    headline: ['FROM THE USA ', 'TO INDIA.'],
+    lead: '',
+    text: 'Red Flag World began in the United States and is now growing its roots in India — bringing global standards of hospitality and storytelling home, and taking Indian ambition to the world.',
+    extra: 'extraOrigin'
+  }
+};
+
+const CHAPTERS = ['vision', 'homes', 'media', 'holdings', 'what-are-we', 'origin'];
+const hero = document.querySelector('.hero');
+const rises = [].slice.call(hero.querySelectorAll('.hrise'));
+const heroLead = document.getElementById('heroLead');
+const heroBody = document.getElementById('heroBody');
+const scenes = [].slice.call(document.querySelectorAll('.bg video'));
+let chapter = 'vision', swapT = 0;
+
+function showScene(v) {
+  if (!v.getAttribute('src')) { v.preload = 'auto'; v.src = v.dataset.src; v.load(); }
+  function go() {
+    if (v.dataset.chapter !== chapter) return;
+    try { v.currentTime = 0; } catch(err){}
+    const pr = v.play(); if (pr && pr.catch) pr.catch(() => {});
+    scenes.forEach(o => {
+      if (o === v) { o.classList.add('on'); return; }
+      if (!o.classList.contains('on')) return;
+      o.classList.remove('on');
+      setTimeout(() => { if (!o.classList.contains('on')) o.pause(); }, 950);
+    });
+  }
+  if (v.readyState >= 3) go(); else v.addEventListener('canplay', go, { once: true });
+}
+
+function updateProgress(id) {
+  const idx = CHAPTERS.indexOf(id);
+  if (idx === -1) return;
+  const container = document.querySelector('.dock-progress');
+  if (container) {
+    container.setAttribute('aria-valuenow', String(idx + 1));
+    container.setAttribute('aria-valuetext', `Section ${idx + 1} of ${CHAPTERS.length}: ${id.toUpperCase()}`);
+  }
+  const segs = document.querySelectorAll('.prog-seg');
+  [].forEach.call(segs, (btn, i) => {
+    const isOn = (i === idx);
+    const isPassed = (i < idx);
+    btn.classList.toggle('on', isOn);
+    btn.classList.toggle('passed', isPassed);
+    btn.setAttribute('aria-selected', String(isOn));
+    const t = btn.querySelector('.t');
+    if (isOn && t) decode(t);
+  });
+
+  const railLis = document.querySelectorAll('.index li');
+  const railLinks = document.querySelectorAll('.index a');
+  [].forEach.call(railLis, (li, i) => {
+    const link = railLinks[i];
+    const match = link && (link.getAttribute('href') === '#' + id);
+    li.classList.toggle('on', match);
+    if (link) {
+      if (match) {
+        link.setAttribute('aria-current', 'true');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    }
+  });
+}
+
+function showChapter(id) {
+  if (!COPY[id] || id === chapter) return;
+  chapter = id;
+  updateProgress(id);
+  scenes.forEach(v => { if (v.dataset.chapter === id) showScene(v); });
+  const c = COPY[id];
+  clearTimeout(swapT);
+  hero.classList.add('swapping');
+  swapT = setTimeout(() => {
+    rises[0].textContent = c.headline[0];
+    rises[1].textContent = c.headline[1];
+    heroLead.textContent = c.lead;
+    heroBody.textContent = c.text;
+
+    const extraH = document.getElementById('extraHoldings');
+    const extraO = document.getElementById('extraOrigin');
+    if (extraH) extraH.classList.toggle('show', c.extra === 'extraHoldings');
+    if (extraO) extraO.classList.toggle('show', c.extra === 'extraOrigin');
+
+    void hero.offsetWidth;
+    hero.classList.remove('swapping');
+  }, RM ? 0 : 360);
+}
+
+[].forEach.call(document.querySelectorAll('.index a'), a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const id = a.getAttribute('href').slice(1);
+    decode(a.querySelector('.t'));
+    showChapter(id);
+  });
+});
+
+[].forEach.call(document.querySelectorAll('.links a'), a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const id = a.getAttribute('href').slice(1);
+    const railLink = document.querySelector('.index a[href="#' + id + '"]');
+    if (railLink) decode(railLink.querySelector('.t'));
+    showChapter(id);
+  });
+});
+
+[].forEach.call(document.querySelectorAll('.prog-seg'), btn => {
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    const id = btn.getAttribute('data-chapter');
+    if (id && id !== chapter) {
+      const railLink = document.querySelector('.index a[href="#' + id + '"]');
+      if (railLink) decode(railLink.querySelector('.t'));
+      showChapter(id);
+    }
+  });
+});
+
+function stepChapter(dir) {
+  let idx = CHAPTERS.indexOf(chapter);
+  if (idx === -1) idx = 0;
+  let next = idx + dir;
+  if (next < 0) next = CHAPTERS.length - 1;
+  else if (next >= CHAPTERS.length) next = 0;
+  const nextId = CHAPTERS[next];
+  const railLink = document.querySelector('.index a[href="#' + nextId + '"]');
+  if (railLink) decode(railLink.querySelector('.t'));
+  showChapter(nextId);
+}
+
+let wheelCooldown = 0;
+window.addEventListener('wheel', e => {
+  if (Math.abs(e.deltaY) < 16) return;
+  const now = performance.now();
+  if (now - wheelCooldown < 650) return;
+  wheelCooldown = now;
+  if (e.deltaY > 0) stepChapter(1);
+  else stepChapter(-1);
+}, { passive: true });
+
+let touchStartY = 0;
+window.addEventListener('touchstart', e => {
+  if (e.touches && e.touches.length === 1) {
+    touchStartY = e.touches[0].clientY;
+  }
+}, { passive: true });
+window.addEventListener('touchend', e => {
+  if (e.changedTouches && e.changedTouches.length === 1) {
+    const dy = touchStartY - e.changedTouches[0].clientY;
+    if (Math.abs(dy) > 40) {
+      const now = performance.now();
+      if (now - wheelCooldown < 650) return;
+      wheelCooldown = now;
+      if (dy > 0) stepChapter(1);
+      else stepChapter(-1);
+    }
+  }
+}, { passive: true });
+
+window.addEventListener('keydown', e => {
+  if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT')) return;
+  if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'PageDown') {
+    e.preventDefault();
+    stepChapter(1);
+  } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+    e.preventDefault();
+    stepChapter(-1);
+  }
+});
+
+/* ---------------------------------------------------------------
+   4. MODALS & FORMS
+---------------------------------------------------------------- */
+function openModal(id) {
+  const m = document.getElementById(id);
+  if (!m) return;
+  m.classList.add('open');
+  const firstInput = m.querySelector('input, select');
+  if (firstInput) setTimeout(() => firstInput.focus(), 120);
+}
+
+function closeModal(id) {
+  const m = document.getElementById(id);
+  if (!m) return;
+  m.classList.remove('open');
+}
+
+const joinBtn = document.getElementById('joinBtn');
+if (joinBtn) joinBtn.addEventListener('click', e => {
+  e.preventDefault();
+  openModal('joinModal');
+});
+
+const talkBtn = document.getElementById('talkBtn');
+if (talkBtn) talkBtn.addEventListener('click', e => {
+  e.preventDefault();
+  openModal('joinModal');
+});
+
+const newsletterBtn = document.getElementById('newsletterBtn');
+if (newsletterBtn) newsletterBtn.addEventListener('click', e => {
+  e.preventDefault();
+  openModal('newsletterModal');
+});
+
+[].forEach.call(document.querySelectorAll('[data-close]'), btn => {
+  btn.addEventListener('click', () => {
+    const id = btn.getAttribute('data-close');
+    closeModal(id);
+  });
+});
+
+[].forEach.call(document.querySelectorAll('.modal-overlay'), m => {
+  m.addEventListener('click', e => {
+    if (e.target === m) closeModal(m.id);
+  });
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeModal('joinModal');
+    closeModal('newsletterModal');
+    closeModal('sheetsModal');
+    closeModal('confirmModal');
+  }
+});
+
+const joinForm = document.getElementById('joinForm');
+if (joinForm) {
+  joinForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    const name = document.getElementById('joinName')?.value || '';
+    const email = document.getElementById('joinEmail')?.value || '';
+    const phone = document.getElementById('joinPhone')?.value || '';
+    const interest = document.getElementById('joinInterest')?.value || '';
+
+    // Append to Google Sheet if connected
+    const synced = await appendEntryToSheet({
+      type: 'Join Inquiry',
+      name,
+      email,
+      phone,
+      interest
+    });
+
+    joinForm.style.display = 'none';
+    const success = document.getElementById('joinSuccess');
+    if (success) {
+      success.classList.add('show');
+      const syncStatus = document.getElementById('joinSyncStatus');
+      if (syncStatus) {
+        syncStatus.style.display = synced ? 'inline-flex' : 'none';
+      }
+    }
+  });
+}
+
+const newsletterForm = document.getElementById('newsletterForm');
+if (newsletterForm) {
+  newsletterForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    const email = document.getElementById('newsEmail')?.value || '';
+
+    // Append to Google Sheet if connected
+    const synced = await appendEntryToSheet({
+      type: 'Newsletter Subscriber',
+      name: 'Subscriber',
+      email,
+      phone: '-',
+      interest: 'Dispatches'
+    });
+
+    newsletterForm.style.display = 'none';
+    const success = document.getElementById('newsletterSuccess');
+    if (success) {
+      success.classList.add('show');
+      const syncStatus = document.getElementById('newsletterSyncStatus');
+      if (syncStatus) {
+        syncStatus.style.display = synced ? 'inline-flex' : 'none';
+      }
+    }
+  });
+}
+
+/* ---------------------------------------------------------------
+   5. BOOT
+---------------------------------------------------------------- */
+function boot() {
+  reserve();
+  if (RM) return;
+  function at(sel, t0, step) {
+    [].slice.call(document.querySelectorAll(sel)).forEach((el, i) => {
+      setTimeout(() => decode(el), t0 + i * (step || 0));
+    });
+  }
+  at('.join-btn .t', 360);
+  at('.links a .t', 360, 40);
+  at('.index li.on .t', 660);
+  at('.index li:not(.on) .t', 720, 50);
+  at('.cta .t', 900);
+  at('.dock .t', 1000, 60);
+
+  setTimeout(() => document.documentElement.classList.remove('anim'), 2200);
+  setTimeout(() => labels.forEach(settle), 2600);
+}
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(boot); else addEventListener('load', boot);
+
+let rt;
+addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(reserve, 160); });
+</script>
+</body>
+</html>
